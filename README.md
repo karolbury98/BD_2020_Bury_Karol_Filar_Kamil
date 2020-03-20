@@ -1,4 +1,4 @@
-# BD_2020_Bury_Karol_Kamil_Filar
+# BD_2020_Bury_Karol_Filar_Kamil
 1.	Typ projektu: kursowy
 2.	Projekt realizowany w zespole
 3.	Projekt bazy danych dla biblioteki. Baza zawiera tabele: książki, autorzy, kategorie, wydawnictwa, wypożyczenia, kary, pracownicy, klienci, pracownicy_adres, klienci_adres. Relacje pomiędzy tabelami:
