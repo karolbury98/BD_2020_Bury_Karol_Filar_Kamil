@@ -1,1 +1,1 @@
-W tym folderze znajdowaæ siê bêd¹ pliki do GUI
+W tym folderze znajdowaÄ‡ siÄ™ bÄ™dÄ… pliki do GUI
