@@ -1,1 +1,1 @@
-W tym folderze bêd¹ siê znajdowaæ pliki bazy danych
+W tym folderze bÄ™dÄ… siÄ™ znajdowaÄ‡ pliki bazy danych
