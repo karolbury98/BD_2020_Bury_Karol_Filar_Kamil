@@ -1,0 +1,1 @@
+W tym folderze znajdowaæ siê bêd¹ pliki do GUI

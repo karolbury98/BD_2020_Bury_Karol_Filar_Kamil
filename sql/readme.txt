@@ -1,0 +1,1 @@
+W tym folderze bêd¹ siê znajdowaæ pliki bazy danych
