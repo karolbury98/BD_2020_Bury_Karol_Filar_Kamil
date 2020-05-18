@@ -1,1 +1,4 @@
 W tym pliku będą hasła do kont
+
+Konto administratora: 
+login: admin hasło: admin
