@@ -148,13 +148,14 @@ public class Logowanie extends javax.swing.JFrame {
             rs = (OracleResultSet) pst.executeQuery();
             if(rs.next()){
                 JOptionPane.showMessageDialog(null,"Zalogowano pomyślnie");
+                 new Biblioteka_main().setVisible(true);
+                 super.dispose();
                 
             } else{
                 JOptionPane.showMessageDialog(null,"Zła nazwa użytkownika lub hasło");
             }
            conn.close();
-           new Biblioteka_main().setVisible(true);
-       super.dispose();
+          
         } catch(Exception e){
             //JOptionPane.showMessageDialog(null,e);
             System.out.println(e);

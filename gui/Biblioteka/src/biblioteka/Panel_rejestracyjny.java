@@ -4,13 +4,22 @@
  * and open the template in the editor.
  */
 package biblioteka;
-
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import oracle.jdbc.OraclePreparedStatement;
+import oracle.jdbc.OracleResultSet;
 /**
  *
  * @author Kamil
  */
 public class Panel_rejestracyjny extends javax.swing.JFrame {
-
+    Connection conn = null;
+    CallableStatement stmt = null;
+    OraclePreparedStatement pst = null;
+    OracleResultSet rs = null;
+    
     /**
      * Creates new form Panel_rejestracyjny
      */
@@ -51,6 +60,7 @@ public class Panel_rejestracyjny extends javax.swing.JFrame {
         jTextField8 = new javax.swing.JTextField();
         jTextField9 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -135,6 +145,14 @@ public class Panel_rejestracyjny extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton1.setText("Powrót");
 
+        jButton2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButton2.setText("Zarejestruj");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -194,7 +212,11 @@ public class Panel_rejestracyjny extends javax.swing.JFrame {
                                 .addComponent(jLabel11)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton1)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jButton1)
+                                        .addGap(28, 28, 28)
+                                        .addComponent(jButton2)
+                                        .addGap(0, 0, Short.MAX_VALUE))
                                     .addComponent(jTextField9))))))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
@@ -248,7 +270,9 @@ public class Panel_rejestracyjny extends javax.swing.JFrame {
                     .addComponent(jLabel11)
                     .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -282,6 +306,35 @@ public class Panel_rejestracyjny extends javax.swing.JFrame {
     private void jTextField9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField9ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField9ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        //PRZYCISK ZAREJESTRUJ
+        conn = DbAccess.ConnectDb();
+        try{
+            //String sql = "select ID_KONTA FROM LOGOWANIE";
+          //  pst = (OraclePreparedStatement) conn.prepareStatement(sql);
+           // rs = (OracleResultSet) pst.executeQuery();
+          //  while(rs.next()){
+               // System.out.println("wynik"+rs);
+        //         System.out.println(rs.getInt(1));
+        //    } 
+            stmt = conn.prepareCall("{call ADD_KONTO(?,?,?,?,?)}");
+            int id_konta = 3; //Tutaj do zmiany, na razie id konta jest przypisywane na siłę
+            stmt.setInt(1,id_konta);
+            int id_roli = 2; //Rola domyślnie przypisywana jako "Użytkownik"
+            stmt.setInt(2,id_roli);
+            stmt.setString(3,jTextField1.getText());
+            stmt.setString(4,jPasswordField2.getText());
+            stmt.registerOutParameter(5, java.sql.Types.VARCHAR);
+            stmt.executeUpdate();
+            String result = stmt.getString(5);
+            System.out.println("Dodano użytkownika: "+result);
+            
+        } catch(Exception e){
+            System.out.println(e);
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -320,6 +373,7 @@ public class Panel_rejestracyjny extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
