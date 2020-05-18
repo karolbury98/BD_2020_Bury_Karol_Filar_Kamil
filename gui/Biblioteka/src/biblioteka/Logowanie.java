@@ -133,18 +133,17 @@ public class Logowanie extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // PRZYCISK LOGOWANIA
         
-       // conn = DbAccess.ConnectDb();
+       
        conn = DbAccess.ConnectDb();
         try{
            
-            System.out.println("Jestem w try");
             String sql = "select * from LOGOWANIE where LOGIN=? and HASLO=?";
             pst = (OraclePreparedStatement) conn.prepareStatement(sql);
             
             pst.setString(1, login.getText());
             pst.setString(2, haslo.getText());
            
-           // pst = (OraclePreparedStatement) conn.prepareStatement(sql);
+           
          
             rs = (OracleResultSet) pst.executeQuery();
             if(rs.next()){

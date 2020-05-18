@@ -3,10 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Karol/Desktop/Bazy%20danych%20projekt/Biblioteka/src/biblioteka/Biblioteka_main.java</file>
-            <file>file:/C:/Users/Karol/Desktop/Bazy%20danych%20projekt/Biblioteka/src/biblioteka/Dodaj_ksiazke.java</file>
-            <file>file:/C:/Users/Karol/Desktop/Bazy%20danych%20projekt/Biblioteka/src/biblioteka/Panel_administratora.java</file>
-            <file>file:/C:/Users/Karol/Desktop/Bazy%20danych%20projekt/Biblioteka/src/biblioteka/Baza_książek.java</file>
+            <file>file:/C:/Users/Karol/Documents/GitHub/BD_2020_Bury_Karol_Filar_Kamil/gui/Biblioteka/src/biblioteka/Logowanie.java</file>
+            <file>file:/C:/Users/Karol/Documents/GitHub/BD_2020_Bury_Karol_Filar_Kamil/gui/Biblioteka/src/biblioteka/DbAccess.java</file>
+            <file>file:/C:/Users/Karol/Documents/GitHub/BD_2020_Bury_Karol_Filar_Kamil/gui/Biblioteka/src/biblioteka/Moje_konto.java</file>
+            <file>file:/C:/Users/Karol/Documents/GitHub/BD_2020_Bury_Karol_Filar_Kamil/gui/Biblioteka/src/biblioteka/Regulamin.java</file>
         </group>
     </open-files>
 </project-private>
