@@ -17,3 +17,51 @@ BEGIN
   out_result := 'FALSE';
   ROLLBACK;
 END;
+
+
+
+CREATE OR REPLACE PROCEDURE ADD_USER
+(v_idklienta IN KLIENCI.ID_KLIENTA%TYPE,
+v_idadresu IN KLIENCI.ID_ADRESU%TYPE,
+v_idkonta IN KLIENCI.ID_KONTA%TYPE,
+v_imie IN KLIENCI.IMIE%TYPE,
+v_nazwisko IN KLIENCI.NAZWISKO%TYPE,
+v_telefon IN KLIENCI.NUMER_TELEFONU%TYPE,
+out_result OUT VARCHAR2)
+AS
+BEGIN
+    INSERT INTO KLIENCI (ID_KLIENTA,ID_ADRESU, ID_KONTA, IMIE, NAZWISKO, NUMER_TELEFONU)
+    VALUES (v_idklienta,v_idadresu,v_idkonta,v_imie, v_nazwisko, v_telefon);
+    commit;
+    
+    out_result := 'TRUE';
+    
+    EXCEPTION
+  WHEN OTHERS THEN 
+  out_result := 'FALSE';
+  ROLLBACK;
+END;
+
+
+
+CREATE OR REPLACE PROCEDURE ADD_ADRES
+(v_idadresu IN ADRESY.ID_ADRESU%TYPE,
+v_miejscowosc IN ADRESY.MIEJSCOWOSC%TYPE,
+v_ulica IN ADRESY.ULICA%TYPE,
+v_nrdomu IN ADRESY.NUMER_DOMU%TYPE,
+v_nrlokalu IN ADRESY.NUMER_LOKALU%TYPE,
+v_kodpocztowy IN ADRESY.KOD_POCZTOWY%TYPE,
+out_result OUT VARCHAR2)
+AS
+BEGIN
+    INSERT INTO ADRESY (ID_ADRESU, MIEJSCOWOSC, ULICA, NUMER_DOMU, NUMER_LOKALU, KOD_POCZTOWY)
+    VALUES (v_idadresu, v_miejscowosc, v_ulica, v_nrdomu, v_nrlokalu, v_kodpocztowy);
+    commit;
+    
+    out_result := 'TRUE';
+    
+    EXCEPTION
+  WHEN OTHERS THEN 
+  out_result := 'FALSE';
+  ROLLBACK;
+END;
