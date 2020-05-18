@@ -1,0 +1,19 @@
+CREATE OR REPLACE PROCEDURE ADD_KONTO
+(v_idkonta IN LOGOWANIE.ID_KONTA%TYPE,
+v_idroli IN LOGOWANIE.ID_ROLI%TYPE,
+v_login IN LOGOWANIE.LOGIN%TYPE,
+v_haslo IN LOGOWANIE.HASLO%TYPE,
+out_result OUT VARCHAR2)
+AS
+BEGIN
+    INSERT INTO LOGOWANIE (ID_KONTA, ID_ROLI, LOGIN, HASLO)
+    VALUES (v_idkonta,v_idroli,v_login,v_haslo);
+    commit;
+    
+    out_result := 'TRUE';
+    
+    EXCEPTION
+  WHEN OTHERS THEN 
+  out_result := 'FALSE';
+  ROLLBACK;
+END;
