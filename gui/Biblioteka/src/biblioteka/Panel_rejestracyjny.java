@@ -6,6 +6,8 @@
 package biblioteka;
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import oracle.jdbc.OraclePreparedStatement;
@@ -311,16 +313,18 @@ public class Panel_rejestracyjny extends javax.swing.JFrame {
         //PRZYCISK ZAREJESTRUJ
         conn = DbAccess.ConnectDb();
         try{
-            //String sql = "select ID_KONTA FROM LOGOWANIE";
-          //  pst = (OraclePreparedStatement) conn.prepareStatement(sql);
-           // rs = (OracleResultSet) pst.executeQuery();
-          //  while(rs.next()){
-               // System.out.println("wynik"+rs);
-        //         System.out.println(rs.getInt(1));
-        //    } 
-            stmt = conn.prepareCall("{call ADD_KONTO(?,?,?,?,?)}");
-            int id_konta = 3; //Tutaj do zmiany, na razie id konta jest przypisywane na siłę
-            stmt.setInt(1,id_konta);
+           
+        String sql = "select IDKONTA.nextval from DUAL";
+        pst = (OraclePreparedStatement) conn.prepareStatement(sql);
+       rs = (OracleResultSet) pst.executeQuery();
+           while(rs.next()){
+            int nextID_from_seq;
+            nextID_from_seq = rs.getInt(1);
+                System.out.println(nextID_from_seq);
+                  stmt = conn.prepareCall("{call ADD_KONTO(?,?,?,?,?)}");
+           
+          int idkonta = nextID_from_seq;
+            stmt.setInt(1,idkonta);
             int id_roli = 2; //Rola domyślnie przypisywana jako "Użytkownik"
             stmt.setInt(2,id_roli);
             stmt.setString(3,jTextField1.getText());
@@ -329,7 +333,9 @@ public class Panel_rejestracyjny extends javax.swing.JFrame {
             stmt.executeUpdate();
             String result = stmt.getString(5);
             System.out.println("Dodano użytkownika: "+result);
-            
+                
+           }
+           
         } catch(Exception e){
             System.out.println(e);
             e.printStackTrace();
