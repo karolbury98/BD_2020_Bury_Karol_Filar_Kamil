@@ -153,15 +153,17 @@ public class Panel_rejestracyjny extends javax.swing.JFrame {
             int id_roli = 2; //Rola domyślnie przypisywana jako "Użytkownik"
             stmt.setInt(2,id_roli);
             stmt.setString(3,jTextField1.getText());
-            stmt.setString(4,jPasswordField2.getText());
-            stmt.registerOutParameter(5, java.sql.Types.VARCHAR);
+            if(jPasswordField2.getText() == jPasswordField1.getText()){
+              stmt.setString(4,jPasswordField2.getText());  
+           stmt.registerOutParameter(5, java.sql.Types.VARCHAR);
             stmt.executeUpdate();
             String result = stmt.getString(5);
             System.out.println("Dodano użytkownika: "+result);
-                
-           }
-           new Panel_rejestracyjny2().setVisible(true);
+              new Panel_rejestracyjny2().setVisible(true);
        super.dispose();
+               } else JOptionPane.showMessageDialog(null,"Hasła nie są takie same!!");  
+           }
+         
            
            
         } catch(Exception e){

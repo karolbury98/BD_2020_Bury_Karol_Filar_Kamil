@@ -5,12 +5,19 @@
  */
 package biblioteka;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Karol
  */
 public class Autorzy extends javax.swing.JFrame {
-
+ Connection conn = null;
     /**
      * Creates new form Autorzy
      */
@@ -34,13 +41,24 @@ public class Autorzy extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel1.setText("Biblioteka - autorzy");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
                 "Imię", "Nazwisko", "Narodowość", "Data urodzenia", "Data śmierci"
@@ -97,6 +115,28 @@ public class Autorzy extends javax.swing.JFrame {
          new Biblioteka_main().setVisible(true);
        super.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        conn = DbAccess.ConnectDb();
+       try{
+           if(conn!=null){
+               Statement state = conn.createStatement();
+               ResultSet rs = state.executeQuery("select * from AUTORZY");
+               int i=0;
+               while(rs.next()){
+                   jTable1.getModel().setValueAt(rs.getString("IMIE"),i,0);
+                    jTable1.getModel().setValueAt(rs.getString("NAZWISKO"),i,1);
+                    jTable1.getModel().setValueAt(rs.getString("NARODOWOSC"),i,2);
+                    jTable1.getModel().setValueAt(rs.getDate("DATA_URODZENIA"),i,3);
+                    jTable1.getModel().setValueAt(rs.getDate("DATA_SMIERCI"),i,4);
+                    
+                    i++;
+               }
+           }
+       } catch (SQLException ex){
+           Logger.getLogger(Regulamin.class.getName()).log(Level.SEVERE,null,ex);
+       }
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments

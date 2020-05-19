@@ -5,12 +5,19 @@
  */
 package biblioteka;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Karol
  */
 public class Regulamin extends javax.swing.JFrame {
-
+     Connection conn = null;
     /**
      * Creates new form Regulamin
      */
@@ -36,6 +43,11 @@ public class Regulamin extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel1.setText("Biblioteka - regulamin");
@@ -46,7 +58,12 @@ public class Regulamin extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
                 "Typ kary", "Należność"
@@ -120,6 +137,24 @@ public class Regulamin extends javax.swing.JFrame {
         new Moje_konto().setVisible(true);
        super.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+       conn = DbAccess.ConnectDb();
+       try{
+           if(conn!=null){
+               Statement state = conn.createStatement();
+               ResultSet rs = state.executeQuery("select * from KARY");
+               int i=0;
+               while(rs.next()){
+                   jTable1.getModel().setValueAt(rs.getString("TYP_KARY"),i,0);
+                    jTable1.getModel().setValueAt(rs.getString("KWOTA_WYNAGRADZAJACA"),i,1);
+                    i++;
+               }
+           }
+       } catch (SQLException ex){
+           Logger.getLogger(Regulamin.class.getName()).log(Level.SEVERE,null,ex);
+       }
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
