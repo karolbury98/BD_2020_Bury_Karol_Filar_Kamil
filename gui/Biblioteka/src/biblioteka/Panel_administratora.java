@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 import oracle.jdbc.OracleCallableStatement;
 import oracle.jdbc.OracleTypes;
 
@@ -79,6 +80,11 @@ public class Panel_administratora extends javax.swing.JFrame {
                 "Tytuł", "Kategoria", "Autor", "Ilość egzemplarzy", "Dostępność"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -243,6 +249,15 @@ public class Panel_administratora extends javax.swing.JFrame {
            Logger.getLogger(Regulamin.class.getName()).log(Level.SEVERE,null,ex);
        }
     }//GEN-LAST:event_formWindowOpened
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+      DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+       int selectedRowIndex = jTable1.getSelectedRow();
+       jTextField2.setText(model.getValueAt(selectedRowIndex,0).toString());
+       jTextField6.setText(model.getValueAt(selectedRowIndex,1).toString());
+       jTextField5.setText(model.getValueAt(selectedRowIndex,2).toString());
+       jTextField7.setText(model.getValueAt(selectedRowIndex,3).toString());
+    }//GEN-LAST:event_jTable1MouseClicked
 
     /**
      * @param args the command line arguments
