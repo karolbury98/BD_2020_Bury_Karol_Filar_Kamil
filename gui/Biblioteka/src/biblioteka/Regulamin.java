@@ -5,12 +5,15 @@
  */
 package biblioteka;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import oracle.jdbc.OracleCallableStatement;
+import oracle.jdbc.OracleTypes;
 
 /**
  *
@@ -142,13 +145,17 @@ public class Regulamin extends javax.swing.JFrame {
        conn = DbAccess.ConnectDb();
        try{
            if(conn!=null){
-               Statement state = conn.createStatement();
-               ResultSet rs = state.executeQuery("select * from KARY");
+              CallableStatement cs = null;
+              cs = conn.prepareCall("call SHOW_KARY(?)");
+        cs.registerOutParameter(1, OracleTypes.CURSOR);
+        cs.execute();
+        ResultSet cursor = ((OracleCallableStatement) cs).getCursor(1);
+               
                int i=0;
-               while(rs.next()){
-                   jTable1.getModel().setValueAt(rs.getString("TYP_KARY"),i,0);
-                    jTable1.getModel().setValueAt(rs.getString("KWOTA_WYNAGRADZAJACA"),i,1);
-                    i++;
+               while(cursor.next()){
+                   jTable1.getModel().setValueAt(cursor.getString(1),i,0);
+                   jTable1.getModel().setValueAt(cursor.getString(2),i,1);            
+                   i++;
                }
            }
        } catch (SQLException ex){

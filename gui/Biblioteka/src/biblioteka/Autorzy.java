@@ -5,12 +5,15 @@
  */
 package biblioteka;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import oracle.jdbc.OracleCallableStatement;
+import oracle.jdbc.OracleTypes;
 
 /**
  *
@@ -120,17 +123,21 @@ public class Autorzy extends javax.swing.JFrame {
         conn = DbAccess.ConnectDb();
        try{
            if(conn!=null){
-               Statement state = conn.createStatement();
-               ResultSet rs = state.executeQuery("select * from AUTORZY");
+              CallableStatement cs = null;
+              cs = conn.prepareCall("call SHOW_AUTORZY(?)");
+        cs.registerOutParameter(1, OracleTypes.CURSOR);
+        cs.execute();
+        ResultSet cursor = ((OracleCallableStatement) cs).getCursor(1);
+               
                int i=0;
-               while(rs.next()){
-                   jTable1.getModel().setValueAt(rs.getString("IMIE"),i,0);
-                    jTable1.getModel().setValueAt(rs.getString("NAZWISKO"),i,1);
-                    jTable1.getModel().setValueAt(rs.getString("NARODOWOSC"),i,2);
-                    jTable1.getModel().setValueAt(rs.getDate("DATA_URODZENIA"),i,3);
-                    jTable1.getModel().setValueAt(rs.getDate("DATA_SMIERCI"),i,4);
-                    
-                    i++;
+               while(cursor.next()){
+                   jTable1.getModel().setValueAt(cursor.getString(1),i,0);
+                   jTable1.getModel().setValueAt(cursor.getString(2),i,1);  
+                    jTable1.getModel().setValueAt(cursor.getString(3),i,2);
+                   jTable1.getModel().setValueAt(cursor.getDate(4),i,3); 
+                    jTable1.getModel().setValueAt(cursor.getDate(5),i,4);
+                   
+                   i++;
                }
            }
        } catch (SQLException ex){

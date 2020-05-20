@@ -19,6 +19,7 @@ public class Logowanie extends javax.swing.JFrame {
         Connection conn = null;
         OraclePreparedStatement pst = null;
         OracleResultSet rs = null;
+         public int ID_KONTA;
         
     /**
      * Creates new form Logowanie
@@ -147,6 +148,8 @@ public class Logowanie extends javax.swing.JFrame {
          
             rs = (OracleResultSet) pst.executeQuery();
             if(rs.next()){
+               
+              ID_KONTA = rs.getInt("ID_KONTA");
                 JOptionPane.showMessageDialog(null,"Zalogowano pomyślnie");
                  new Biblioteka_main().setVisible(true);
                  super.dispose();
@@ -155,7 +158,7 @@ public class Logowanie extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null,"Zła nazwa użytkownika lub hasło");
             }
            conn.close();
-          
+           
         } catch(Exception e){
             //JOptionPane.showMessageDialog(null,e);
             System.out.println(e);

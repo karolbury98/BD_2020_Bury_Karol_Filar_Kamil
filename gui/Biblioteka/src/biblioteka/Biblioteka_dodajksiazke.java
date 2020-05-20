@@ -10,7 +10,7 @@ package biblioteka;
  * @author Kamil
  */
 public class Biblioteka_dodajksiazke extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form Biblioteka_dodajksiazke
      */

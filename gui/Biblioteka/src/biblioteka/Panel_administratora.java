@@ -5,12 +5,21 @@
  */
 package biblioteka;
 
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import oracle.jdbc.OracleCallableStatement;
+import oracle.jdbc.OracleTypes;
+
 /**
  *
  * @author Karol
  */
 public class Panel_administratora extends javax.swing.JFrame {
-
+            Connection conn = null;
     /**
      * Creates new form Panel_administratora
      */
@@ -44,13 +53,27 @@ public class Panel_administratora extends javax.swing.JFrame {
         jTextField7 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel1.setText("Biblioteka - panel administratora");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
                 "Tytuł", "Kategoria", "Autor", "Ilość egzemplarzy", "Dostępność"
@@ -196,6 +219,30 @@ public class Panel_administratora extends javax.swing.JFrame {
         new Biblioteka_dodajksiazke().setVisible(true);
        super.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        conn = DbAccess.ConnectDb();
+       try{
+           if(conn!=null){
+               CallableStatement cs = null;
+              cs = conn.prepareCall("call SHOW_BOOKS(?)");
+        cs.registerOutParameter(1, OracleTypes.CURSOR);
+        cs.execute();
+        ResultSet cursor = ((OracleCallableStatement) cs).getCursor(1);
+               
+               int i=0;
+               while(cursor.next()){
+                   jTable1.getModel().setValueAt(cursor.getString(1),i,0);
+                   jTable1.getModel().setValueAt(cursor.getString(2),i,1);
+                   jTable1.getModel().setValueAt(cursor.getString(3)+" "+cursor.getString(4),i,2);
+                   jTable1.getModel().setValueAt(cursor.getString(5),i,3);                 
+                   i++;
+               }
+           }
+       } catch (SQLException ex){
+           Logger.getLogger(Regulamin.class.getName()).log(Level.SEVERE,null,ex);
+       }
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments

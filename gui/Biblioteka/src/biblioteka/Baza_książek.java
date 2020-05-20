@@ -5,7 +5,9 @@
  */
 package biblioteka;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -14,13 +16,22 @@ import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
-
+import oracle.jdbc.OracleCallableStatement;
+import oracle.jdbc.OracleTypes;
+import java.time.format.DateTimeFormatter;  
+import java.time.LocalDateTime;  
 /**
  *
  * @author Karol
  */
 public class Baza_książek extends javax.swing.JFrame {
 Connection conn = null;
+            //pobranie daty
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd"); 
+          //  Date dt = new Date();
+          //  LocalDateTime.from(dt.toInstant()).plusDays(1);
+           // LocalDateTime now = LocalDateTime.now();  
+            
     /**
      * Creates new form Baza_książek
      */
@@ -226,22 +237,18 @@ Connection conn = null;
          conn = DbAccess.ConnectDb();
        try{
            if(conn!=null){
-               Statement state = conn.createStatement();
-               ResultSet rs = state.executeQuery("SELECT K.TYTUL, KA.NAZWA, A.IMIE, A.NAZWISKO, K.ILOSC_EGZEMPLARZY "
-                       + "FROM KSIAZKI K "
-                       + "INNER JOIN AUTORZY_KSIAZKI AK "
-                       + "on K.ID_KSIAZKI = AK.ID_KSIAZKI "
-                       + "INNER JOIN AUTORZY A "
-                       + "on AK.ID_AUTORA = A.ID_AUTORA "
-                       + "INNER JOIN KATEGORIE KA "
-                       + "on K.ID_KATEGORII = KA.ID_KATEGORII");
+               CallableStatement cs = null;
+              cs = conn.prepareCall("call SHOW_BOOKS(?)");
+        cs.registerOutParameter(1, OracleTypes.CURSOR);
+        cs.execute();
+        ResultSet cursor = ((OracleCallableStatement) cs).getCursor(1);
                
                int i=0;
-               while(rs.next()){
-                   jTable1.getModel().setValueAt(rs.getString("TYTUL"),i,0);
-                   jTable1.getModel().setValueAt(rs.getString("NAZWA"),i,1);
-                   jTable1.getModel().setValueAt(rs.getString("imie")+" "+rs.getString("nazwisko"),i,2);
-                   jTable1.getModel().setValueAt(rs.getString("ILOSC_EGZEMPLARZY"),i,3);                 
+               while(cursor.next()){
+                   jTable1.getModel().setValueAt(cursor.getString(1),i,0);
+                   jTable1.getModel().setValueAt(cursor.getString(2),i,1);
+                   jTable1.getModel().setValueAt(cursor.getString(3)+" "+cursor.getString(4),i,2);
+                   jTable1.getModel().setValueAt(cursor.getString(5),i,3);                 
                    i++;
                }
            }
@@ -251,7 +258,12 @@ Connection conn = null;
     }//GEN-LAST:event_formWindowOpened
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // do zrobienia jeśli ilość egzemplarzy mniejsza niż to error
+        // warunek WHERE ID_KONTA = ID_KONTA żeby było przypisanie do bazy danych
+        String tytul = jTextField1.getText();
+         String kategoria = jTextField2.getText();
+          String autor = jTextField3.getText();
+           String ilosc = jTextField4.getText(); //ilosc - 1 funkcja
+           
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
@@ -290,7 +302,7 @@ Connection conn = null;
             java.util.logging.Logger.getLogger(Baza_książek.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-     
+       
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

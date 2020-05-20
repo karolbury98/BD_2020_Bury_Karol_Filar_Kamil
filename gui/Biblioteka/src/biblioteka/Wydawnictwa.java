@@ -5,12 +5,15 @@
  */
 package biblioteka;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import oracle.jdbc.OracleCallableStatement;
+import oracle.jdbc.OracleTypes;
 
 /**
  *
@@ -118,16 +121,20 @@ public class Wydawnictwa extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
          conn = DbAccess.ConnectDb();
        try{
-           if(conn!=null){
-               Statement state = conn.createStatement();
-               ResultSet rs = state.executeQuery("select * from WYDAWNICTWA");
+            if(conn!=null){
+              CallableStatement cs = null;
+              cs = conn.prepareCall("call SHOW_WYDAWNICTWA(?)");
+        cs.registerOutParameter(1, OracleTypes.CURSOR);
+        cs.execute();
+        ResultSet cursor = ((OracleCallableStatement) cs).getCursor(1);
+               
                int i=0;
-               while(rs.next()){
-                   jTable1.getModel().setValueAt(rs.getString("NAZWA"),i,0);
-                    jTable1.getModel().setValueAt(rs.getString("MIEJSCOWOSC"),i,1);
-                    jTable1.getModel().setValueAt(rs.getString("ULICA"),i,2);
-                    jTable1.getModel().setValueAt(rs.getString("NUMER_BUDYNKU"),i,3);
-                    i++;
+               while(cursor.next()){
+                   jTable1.getModel().setValueAt(cursor.getString(1),i,0);
+                   jTable1.getModel().setValueAt(cursor.getString(2),i,1);   
+                   jTable1.getModel().setValueAt(cursor.getString(3),i,2);   
+                   jTable1.getModel().setValueAt(cursor.getString(4),i,3);   
+                   i++;
                }
            }
        } catch (SQLException ex){
