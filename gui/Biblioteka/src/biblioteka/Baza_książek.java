@@ -26,11 +26,6 @@ import java.time.LocalDateTime;
  */
 public class Baza_książek extends javax.swing.JFrame {
 Connection conn = null;
-            //pobranie daty
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd"); 
-          //  Date dt = new Date();
-          //  LocalDateTime.from(dt.toInstant()).plusDays(1);
-           // LocalDateTime now = LocalDateTime.now();  
             
     /**
      * Creates new form Baza_książek
@@ -41,6 +36,7 @@ Connection conn = null;
      }
     public Baza_książek() {
         initComponents();
+        jTable1.setAutoCreateRowSorter(true);
     }
 
     /**

@@ -26,6 +26,7 @@ public class Regulamin extends javax.swing.JFrame {
      */
     public Regulamin() {
         initComponents();
+        jTable1.setAutoCreateRowSorter(true);
     }
 
     /**

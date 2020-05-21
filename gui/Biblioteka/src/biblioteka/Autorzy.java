@@ -26,6 +26,7 @@ public class Autorzy extends javax.swing.JFrame {
      */
     public Autorzy() {
         initComponents();
+        jTable1.setAutoCreateRowSorter(true);
     }
 
     /**

@@ -26,6 +26,7 @@ public class Wydawnictwa extends javax.swing.JFrame {
      */
     public Wydawnictwa() {
         initComponents();
+        jTable1.setAutoCreateRowSorter(true);
     }
 
     /**

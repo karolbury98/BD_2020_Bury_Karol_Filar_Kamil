@@ -26,6 +26,7 @@ public class Panel_administratora extends javax.swing.JFrame {
      */
     public Panel_administratora() {
         initComponents();
+        jTable1.setAutoCreateRowSorter(true);
     }
 
     /**

@@ -16,6 +16,7 @@ public class Moje_wypozyczenia extends javax.swing.JFrame {
      */
     public Moje_wypozyczenia() {
         initComponents();
+        jTable1.setAutoCreateRowSorter(true);
     }
 
     /**
