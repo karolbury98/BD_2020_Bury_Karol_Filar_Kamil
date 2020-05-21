@@ -12,6 +12,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import oracle.jdbc.OracleCallableStatement;
 import oracle.jdbc.OracleTypes;
 
@@ -28,7 +31,7 @@ public class Wydawnictwa extends javax.swing.JFrame {
         initComponents();
         jTable1.setAutoCreateRowSorter(true);
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -74,6 +77,12 @@ public class Wydawnictwa extends javax.swing.JFrame {
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
+            }
+        });
+
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField1KeyReleased(evt);
             }
         });
 
@@ -142,6 +151,14 @@ public class Wydawnictwa extends javax.swing.JFrame {
            Logger.getLogger(Regulamin.class.getName()).log(Level.SEVERE,null,ex);
        }
     }//GEN-LAST:event_formWindowOpened
+
+    private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
+         DefaultTableModel table = (DefaultTableModel)jTable1.getModel(); 
+         String search = jTextField1.getText(); 
+         TableRowSorter<DefaultTableModel> tr = new  TableRowSorter<DefaultTableModel>(table);
+         jTable1.setRowSorter(tr);
+         tr.setRowFilter(RowFilter.regexFilter("(?i)" + search)); 
+    }//GEN-LAST:event_jTextField1KeyReleased
 
     /**
      * @param args the command line arguments
