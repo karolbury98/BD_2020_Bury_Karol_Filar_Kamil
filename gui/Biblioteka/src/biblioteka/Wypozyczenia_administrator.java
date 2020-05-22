@@ -68,6 +68,11 @@ public class Wypozyczenia_administrator extends javax.swing.JFrame {
                 "Nr wypożyczenia", "Dane klienta", "Nr tel klienta", "Tytuł książki", "Autor", "Data wypożyczenia", "Data zwrotu"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -271,6 +276,19 @@ public class Wypozyczenia_administrator extends javax.swing.JFrame {
         new Biblioteka_main().setVisible(true);
        super.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+         DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+       int selectedRowIndex = jTable1.getSelectedRow();
+       jLabel10.setText(model.getValueAt(selectedRowIndex,0).toString());
+       jLabel11.setText(model.getValueAt(selectedRowIndex,1).toString());
+      jLabel12.setText(model.getValueAt(selectedRowIndex,2).toString());
+       jLabel13.setText(model.getValueAt(selectedRowIndex,3).toString());
+       jLabel14.setText(model.getValueAt(selectedRowIndex,4).toString());
+       jLabel15.setText(model.getValueAt(selectedRowIndex,5).toString());
+       jTextField2.setText(model.getValueAt(selectedRowIndex,6).toString());
+       jTextField3.setText(model.getValueAt(selectedRowIndex,7).toString());
+    }//GEN-LAST:event_jTable1MouseClicked
 
     /**
      * @param args the command line arguments
