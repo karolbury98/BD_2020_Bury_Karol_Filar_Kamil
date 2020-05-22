@@ -163,7 +163,7 @@ public class Autorzy extends javax.swing.JFrame {
         TableRowSorter<DefaultTableModel> tr = new  TableRowSorter<DefaultTableModel>(table);
         jTable1.setRowSorter(tr);
         tr.setRowFilter(RowFilter.regexFilter("(?i)" + search));    
-  //tr.setRowFilter(RowFilter.regexFilter(search));
+  
     }//GEN-LAST:event_jTextField1KeyReleased
 
     /**
