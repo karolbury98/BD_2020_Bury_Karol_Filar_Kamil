@@ -106,6 +106,7 @@ public class Biblioteka_main extends javax.swing.JFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 153, 0));
         jLabel1.setText("Biblioteka");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

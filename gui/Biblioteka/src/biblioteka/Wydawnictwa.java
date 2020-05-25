@@ -55,6 +55,7 @@ public class Wydawnictwa extends javax.swing.JFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 153, 0));
         jLabel1.setText("Biblioteka - wydawnictwa");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
