@@ -5,12 +5,24 @@
  */
 package biblioteka;
 
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import oracle.jdbc.OracleCallableStatement;
+import oracle.jdbc.OracleTypes;
+
 /**
  *
  * @author Karol
  */
-public class Moje_konto extends javax.swing.JFrame {
-
+public class Moje_konto extends javax.swing.JFrame{
+        User_login User_login = new User_login();
+      
+      
+        
     /**
      * Creates new form Moje_konto
      */
@@ -48,6 +60,11 @@ public class Moje_konto extends javax.swing.JFrame {
         jTextField8 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel1.setText("Biblioteka - moje konto");
@@ -96,6 +113,11 @@ public class Moje_konto extends javax.swing.JFrame {
 
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton2.setText("Zapisz zmiany");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel9.setText("Kod pocztowy:");
@@ -184,7 +206,7 @@ public class Moje_konto extends javax.swing.JFrame {
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         pack();
@@ -195,13 +217,138 @@ public class Moje_konto extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
-        // TODO add your handling code here:
+       // TODO add your handling code here:
     }//GEN-LAST:event_jTextField6ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         new Biblioteka_main().setVisible(true);
        super.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        Connection conn = DbAccess.ConnectDb();
+       try{
+           if(conn!=null){
+        CallableStatement cs = null;
+        cs = conn.prepareCall("call SHOW_KLIENCI(?,?)");
+        
+        cs.setInt(1,User_login.getInstance().getID_Konta());
+              
+        cs.registerOutParameter(2, OracleTypes.CURSOR);
+        cs.execute();
+        ResultSet cursor = ((OracleCallableStatement) cs).getCursor(2);
+               while(cursor.next()){
+                   jTextField1.setText(cursor.getString(1));
+                   jTextField2.setText(cursor.getString(2));
+                   jTextField3.setText(cursor.getString(3));
+                   //cursor.getString(4) to ID_ADRESU
+                   jTextField4.setText(cursor.getString(5));
+                   jTextField5.setText(cursor.getString(6));
+                   jTextField6.setText(cursor.getString(7));
+                   jTextField7.setText(cursor.getString(8));
+                   jTextField8.setText(cursor.getString(9));
+               }
+           }
+       } catch (SQLException ex){
+           Logger.getLogger(Regulamin.class.getName()).log(Level.SEVERE,null,ex);
+       }
+    }//GEN-LAST:event_formWindowOpened
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+       Connection conn = DbAccess.ConnectDb();
+        String s1 = jTextField1.getText();
+        String s2 = jTextField2.getText();
+        String s3 = jTextField3.getText();
+        String s4 = jTextField4.getText();
+        String s5 = jTextField5.getText();
+        String s6 = jTextField6.getText();
+        String s7 = jTextField7.getText();
+        String s8 = jTextField8.getText();
+
+       try{
+           if(conn!=null){
+               /*
+        CallableStatement cs = null;
+        cs = conn.prepareCall("call UPDATE_KLIENCI(?,?,?,?,?,?,?,?,?)");
+        cs.setInt(1, User_login.getInstance().getID_Konta());
+        cs.setString(2, s1);
+        cs.setString(3, s2);
+        cs.setString(4, s3);
+        cs.setString(5, s4);
+        cs.setString(6, s5);
+        cs.setString(7, s6);
+        cs.setString(8, s7);
+        cs.setString(9, s8);
+        cs.execute();
+        int count = cs.getUpdateCount();
+               System.out.println(count);
+           }
+       } catch (SQLException ex){
+           Logger.getLogger(Regulamin.class.getName()).log(Level.SEVERE,null,ex);
+       }
+               */
+               //
+                CallableStatement cs3 = null;
+        cs3 = conn.prepareCall("call SHOW_KLIENCI(?,?)");
+        
+        cs3.setInt(1,User_login.getInstance().getID_Konta());
+              
+        cs3.registerOutParameter(2, OracleTypes.CURSOR);
+        cs3.execute();
+        ResultSet cursor = ((OracleCallableStatement) cs3).getCursor(2);
+        while(cursor.next()){
+          
+            int idadresu = cursor.getInt(4);
+             
+               
+                CallableStatement cs = null;
+                CallableStatement cs2 = null;
+        cs = conn.prepareCall("call UPDATE_KLIENCI_DANE(?,?,?,?)");
+        cs.setInt(1, User_login.getInstance().getID_Konta());
+        cs.setString(2, s1);
+        cs.setString(3, s2);
+        cs.setString(4, s3);
+        cs.execute();
+        cs2 = conn.prepareCall("call UPDATE_KLIENCI_ADRES(?,?,?,?,?,?)");
+        cs2.setInt(1,idadresu);               
+        cs2.setString(2, s4);
+        cs2.setString(3, s5);
+        cs2.setString(4, s6);
+        cs2.setString(5, s7);
+        cs2.setString(6, s8);
+        
+        cs2.execute();
+        }
+        /*
+        int idadresu = cursor.getInt(4);
+             //  System.out.println(idadresu);
+               //
+                CallableStatement cs = null;
+                CallableStatement cs2 = null;
+        cs = conn.prepareCall("call UPDATE_KLIENCI_DANE(?,?,?,?)");
+        cs.setInt(1, User_login.getInstance().getID_Konta());
+        cs.setString(2, s1);
+        cs.setString(3, s2);
+        cs.setString(4, s3);
+        cs.execute();
+        cs2 = conn.prepareCall("call UPDATE_KLIENCI_ADRES(?,?,?,?,?,?)");
+        cs2.setInt(1,idadresu);
+               
+        cs2.setString(2, s4);
+        cs2.setString(3, s5);
+        cs2.setString(4, s6);
+        cs2.setString(5, s7);
+        cs2.setString(6, s8);
+        
+        cs2.execute();
+        */
+        //int count = cs.getUpdateCount();
+            //   System.out.println(count);
+           }
+       } catch (SQLException ex){
+           Logger.getLogger(Regulamin.class.getName()).log(Level.SEVERE,null,ex);
+       }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

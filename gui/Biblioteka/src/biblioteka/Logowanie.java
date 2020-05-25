@@ -15,11 +15,10 @@ import oracle.jdbc.OracleResultSet;
  * @author Karol
  */
 public class Logowanie extends javax.swing.JFrame {
-
         Connection conn = null;
         OraclePreparedStatement pst = null;
         OracleResultSet rs = null;
-         public int ID_KONTA;
+        public int ID_KONTA;
         
     /**
      * Creates new form Logowanie
@@ -149,9 +148,11 @@ public class Logowanie extends javax.swing.JFrame {
             rs = (OracleResultSet) pst.executeQuery();
             if(rs.next()){
                
-              ID_KONTA = rs.getInt("ID_KONTA");
-                JOptionPane.showMessageDialog(null,"Zalogowano pomyślnie");
-                 new Biblioteka_main().setVisible(true);
+             ID_KONTA = rs.getInt("ID_KONTA");
+             User_login.INSTANCE.setID_Konta(rs.getInt("ID_KONTA"));
+             
+                JOptionPane.showMessageDialog(null,"Zalogowano pomyślnie "+ID_KONTA);
+                 new Biblioteka_main().setVisible(true); 
                  super.dispose();
                 
             } else{
@@ -166,6 +167,9 @@ public class Logowanie extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+  
+   
+    
     private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_loginActionPerformed
@@ -203,6 +207,7 @@ public class Logowanie extends javax.swing.JFrame {
                 new Logowanie().setVisible(true);
             }
         });
+       
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

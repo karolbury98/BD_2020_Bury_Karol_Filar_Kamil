@@ -5,17 +5,33 @@
  */
 package biblioteka;
 
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import oracle.jdbc.OracleCallableStatement;
+import oracle.jdbc.OracleTypes;
+
 /**
  *
  * @author Karol
  */
 public class Moje_konto_admin extends javax.swing.JFrame {
-
+        Logowanie login = new Logowanie();
     /**
      * Creates new form Moje_konto_admin
      */
     public Moje_konto_admin() {
         initComponents();
+        jTextField1.setEditable(false);
+         jTextField2.setEditable(false);
+         jTextField3.setEditable(false);
+         jTextField4.setEditable(false);
+         jTextField5.setEditable(false);
     }
 
     /**
@@ -37,8 +53,14 @@ public class Moje_konto_admin extends javax.swing.JFrame {
         jTextField3 = new javax.swing.JTextField();
         jTextField4 = new javax.swing.JTextField();
         jTextField5 = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel1.setText("Imię:");
 
@@ -49,6 +71,13 @@ public class Moje_konto_admin extends javax.swing.JFrame {
         jLabel4.setText("Data urodzenia:");
 
         jLabel5.setText("Aktywne badania:");
+
+        jButton1.setText("Powrót");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -70,6 +99,10 @@ public class Moje_konto_admin extends javax.swing.JFrame {
                     .addComponent(jTextField4)
                     .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE))
                 .addContainerGap(161, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(104, 104, 104))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -94,11 +127,44 @@ public class Moje_konto_admin extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(81, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(24, 24, 24))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        Connection conn = DbAccess.ConnectDb();
+       try{
+           if(conn!=null){
+        CallableStatement cs = null;
+        cs = conn.prepareCall("call SHOW_ADMIN(?,?)");
+        cs.setInt(1,User_login.getInstance().getID_Konta());
+        cs.registerOutParameter(2, OracleTypes.CURSOR);
+        cs.execute();
+        ResultSet cursor = ((OracleCallableStatement) cs).getCursor(2);
+        DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+               int i=0;
+               while(cursor.next()){
+                   jTextField1.setText(cursor.getString(1));
+                   jTextField2.setText(cursor.getString(2));
+                   jTextField3.setText(cursor.getString(3));
+                   jTextField4.setText(df.format(cursor.getDate(4)));
+                   jTextField5.setText(cursor.getString(5));
+                   i++;
+               }
+           }
+       } catch (SQLException ex){
+           Logger.getLogger(Regulamin.class.getName()).log(Level.SEVERE,null,ex);
+       }
+    }//GEN-LAST:event_formWindowOpened
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+          new Biblioteka_main().setVisible(true);
+       super.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -136,6 +202,7 @@ public class Moje_konto_admin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -23,6 +23,7 @@ import oracle.jdbc.OracleTypes;
  */
 public class Panel_administratora extends javax.swing.JFrame {
             Connection conn = null;
+            public int idksiazki;
     /**
      * Creates new form Panel_administratora
      */
@@ -94,6 +95,11 @@ public class Panel_administratora extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton1.setText("Aktualizuj");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel2.setText("Tytuł");
@@ -258,13 +264,19 @@ public class Panel_administratora extends javax.swing.JFrame {
         cs.registerOutParameter(1, OracleTypes.CURSOR);
         cs.execute();
         ResultSet cursor = ((OracleCallableStatement) cs).getCursor(1);
-               
+        int ilosc = 0;
                int i=0;
                while(cursor.next()){
                    jTable1.getModel().setValueAt(cursor.getString(1),i,0);
                    jTable1.getModel().setValueAt(cursor.getString(2),i,1);
                    jTable1.getModel().setValueAt(cursor.getString(3)+" "+cursor.getString(4),i,2);
-                   jTable1.getModel().setValueAt(cursor.getString(5),i,3);                 
+                   jTable1.getModel().setValueAt(cursor.getInt(5),i,3);
+                   ilosc = cursor.getInt(5);
+                   if (ilosc <= 3) {
+                   jTable1.getModel().setValueAt("Niedostępna",i,4);
+                   }else{
+                   jTable1.getModel().setValueAt("Dostępna",i,4);
+                   }
                    i++;
                }
            }
@@ -294,6 +306,35 @@ public class Panel_administratora extends javax.swing.JFrame {
         new Wypozyczenia_administrator().setVisible(true);
        super.dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Connection conn = DbAccess.ConnectDb();
+        String s1 = jTextField7.getText();
+        try{
+           if(conn!=null){
+                CallableStatement cs = null;
+              
+              cs = conn.prepareCall("call GET_ID_KSIAZKI_UPDATE(?,?)");
+              cs.setString(1, jTextField2.getText());
+       cs.registerOutParameter(2, OracleTypes.CURSOR);
+        cs.execute();
+        ResultSet cursor = ((OracleCallableStatement) cs).getCursor(2);
+        while(cursor.next()){
+           
+               System.out.println("ID KSIAZKI "+cursor.getInt(1));
+                idksiazki = cursor.getInt(1);
+               
+           }
+           CallableStatement cs2 = null;
+         cs2 = conn.prepareCall("call UPDATE_KSIAZKI_ADM(?,?)");
+         cs2.setInt(1,idksiazki );
+         cs2.setString(2, s1);
+         cs2.execute();
+         }
+       } catch (SQLException ex){
+           Logger.getLogger(Regulamin.class.getName()).log(Level.SEVERE,null,ex);
+       }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

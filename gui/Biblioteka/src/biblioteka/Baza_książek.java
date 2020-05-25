@@ -5,6 +5,7 @@
  */
 package biblioteka;
 
+import static biblioteka.DbAccess.ConnectDb;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.Date;
@@ -20,6 +21,7 @@ import oracle.jdbc.OracleCallableStatement;
 import oracle.jdbc.OracleTypes;
 import java.time.format.DateTimeFormatter;  
 import java.time.LocalDateTime;  
+import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.TableRowSorter;
 /**
@@ -271,10 +273,23 @@ Connection conn = null;
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // warunek WHERE ID_KONTA = ID_KONTA żeby było przypisanie do bazy danych
         String tytul = jTextField1.getText();
-         String kategoria = jTextField2.getText();
-          String autor = jTextField3.getText();
-           String ilosc = jTextField4.getText(); //ilosc - 1 funkcja
-           
+        String kategoria = jTextField2.getText();
+        String autor = jTextField3.getText();
+        String ilosc = jTextField4.getText();
+        int foo = Integer.parseInt(ilosc);
+        if (foo <= 3)
+        {
+            JOptionPane.showMessageDialog(null,"Nie można wypożyczyć tej książki ponieważ w czytelni muszą być min. 3 egzemplarze książek! ");
+        } else {
+        
+        conn = ConnectDb();
+        CallableStatement cs = null;
+            try {
+                cs = conn.prepareCall("call ADD_WYPOZYCZENIE(?,?,?,?)");
+            } catch (SQLException ex) {
+                Logger.getLogger(Baza_książek.class.getName()).log(Level.SEVERE, null, ex);
+            }
+           }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked

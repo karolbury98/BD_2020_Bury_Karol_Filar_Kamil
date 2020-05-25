@@ -5,16 +5,25 @@
  */
 package biblioteka;
 
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
+import oracle.jdbc.OracleCallableStatement;
+import oracle.jdbc.OracleTypes;
 
 /**
  *
  * @author Karol
  */
 public class Moje_wypozyczenia extends javax.swing.JFrame {
-
+    Connection conn = null;
+     User_login User_login = new User_login();
     /**
      * Creates new form Moje_wypozyczenia
      */
@@ -50,7 +59,12 @@ public class Moje_wypozyczenia extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
                 "Nazwa książki", "Kategoria", "Autor", "Data wypożyczenia", "Data zwrotu", "Należność"
@@ -116,7 +130,29 @@ public class Moje_wypozyczenia extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-       
+        conn = DbAccess.ConnectDb();
+       try{
+           if(conn!=null){
+        CallableStatement cs = null;
+        cs = conn.prepareCall("call SHOW_WYPOZYCZENIA(?,?)");
+        cs.setInt(1,User_login.getInstance().getID_Konta());
+        cs.registerOutParameter(2, OracleTypes.CURSOR);
+        cs.execute();
+        ResultSet cursor = ((OracleCallableStatement) cs).getCursor(2);
+               int i=0;
+               while(cursor.next()){
+                   jTable1.getModel().setValueAt(cursor.getString(1),i,0);
+                   jTable1.getModel().setValueAt(cursor.getString(2),i,1);
+                   jTable1.getModel().setValueAt(cursor.getString(3)+" "+cursor.getString(4),i,2);
+                   jTable1.getModel().setValueAt(cursor.getString(5),i,3);
+                   jTable1.getModel().setValueAt(cursor.getString(6),i,4);
+                   jTable1.getModel().setValueAt(cursor.getString(7),i,5);
+                   i++;
+               }
+           }
+       } catch (SQLException ex){
+           Logger.getLogger(Regulamin.class.getName()).log(Level.SEVERE,null,ex);
+       }
     }//GEN-LAST:event_formWindowOpened
 
     private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased

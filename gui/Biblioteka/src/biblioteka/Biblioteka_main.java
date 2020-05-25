@@ -5,12 +5,14 @@
  */
 package biblioteka;
 
+import java.sql.Connection;
+
 /**
  *
  * @author Karol
  */
 public class Biblioteka_main extends javax.swing.JFrame {
-
+        User_login User_login = new User_login();
     /**
      * Creates new form Biblioteka_main
      */
@@ -181,8 +183,17 @@ public class Biblioteka_main extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-         new Moje_konto().setVisible(true);
+     //   Connection conn = DbAccess.ConnectDb();
+        
+       
+        if(User_login.getInstance().getID_Konta() == 1){
+            new Moje_konto_admin().setVisible(true);
        super.dispose();
+        }
+        else{
+        new Moje_konto().setVisible(true);
+       super.dispose();
+        }
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
