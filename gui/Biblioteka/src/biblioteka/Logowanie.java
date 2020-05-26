@@ -5,10 +5,16 @@
  */
 package biblioteka;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Types;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import oracle.jdbc.OraclePreparedStatement;
 import oracle.jdbc.OracleResultSet;
+import oracle.jdbc.datasource.OracleDataSource;
 
 /**
  *
@@ -138,9 +144,10 @@ public class Logowanie extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // PRZYCISK LOGOWANIA
         
-       
+      
        conn = DbAccess.ConnectDb();
-        try{
+       
+       try{
            
             String sql = "select * from LOGOWANIE where LOGIN=? and HASLO=?";
             pst = (OraclePreparedStatement) conn.prepareStatement(sql);
@@ -183,6 +190,25 @@ public class Logowanie extends javax.swing.JFrame {
             System.out.println(e);
             e.printStackTrace();
         }
+       
+       /*
+       try{
+       CallableStatement callableStmt = null;
+       
+
+        callableStmt = conn.prepareCall("{ ? = call log_in()}");
+        
+        callableStmt.registerOutParameter(1, Types.VARCHAR);
+        callableStmt.setString(1, login.getText());
+        callableStmt.setString(2, haslo.getText());
+        callableStmt.executeUpdate();
+        String tekst = callableStmt.getString(1);
+        System.out.println(tekst);
+    
+    }catch (SQLException ex){
+           Logger.getLogger(Regulamin.class.getName()).log(Level.SEVERE,null,ex);
+       }
+       */
     }//GEN-LAST:event_jButton1ActionPerformed
 
   

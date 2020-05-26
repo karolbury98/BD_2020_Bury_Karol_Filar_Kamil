@@ -5,16 +5,24 @@
  */
 package biblioteka;
 
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
+import oracle.jdbc.OracleCallableStatement;
+import oracle.jdbc.OracleTypes;
 
 /**
  *
  * @author Karol
  */
 public class Wypozyczenia_administrator extends javax.swing.JFrame {
-
+Connection conn = null;
     /**
      * Creates new form Wypozyczenia_administrator
      */
@@ -48,7 +56,6 @@ public class Wypozyczenia_administrator extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
@@ -59,6 +66,11 @@ public class Wypozyczenia_administrator extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -127,10 +139,6 @@ public class Wypozyczenia_administrator extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel9.setText("Data zwrotu:");
 
-        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(51, 51, 255));
-        jLabel10.setText("jLabel10");
-
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(51, 51, 255));
         jLabel11.setText("jLabel11");
@@ -184,10 +192,7 @@ public class Wypozyczenia_administrator extends javax.swing.JFrame {
                                     .addComponent(jLabel1)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel3)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jLabel3))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -221,8 +226,7 @@ public class Wypozyczenia_administrator extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -244,7 +248,6 @@ public class Wypozyczenia_administrator extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(jLabel6)
-                            .addComponent(jLabel10)
                             .addComponent(jLabel14))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -298,16 +301,45 @@ public class Wypozyczenia_administrator extends javax.swing.JFrame {
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
          DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
        int selectedRowIndex = jTable1.getSelectedRow();
-       jLabel10.setText(model.getValueAt(selectedRowIndex,0).toString());
-       jLabel11.setText(model.getValueAt(selectedRowIndex,1).toString());
-      jLabel12.setText(model.getValueAt(selectedRowIndex,2).toString());
-       jLabel13.setText(model.getValueAt(selectedRowIndex,3).toString());
-       jLabel14.setText(model.getValueAt(selectedRowIndex,4).toString());
-       jLabel15.setText(model.getValueAt(selectedRowIndex,5).toString());
-       jTextField2.setText(model.getValueAt(selectedRowIndex,6).toString());
-       jTextField3.setText(model.getValueAt(selectedRowIndex,7).toString());
+      
+       jLabel11.setText(model.getValueAt(selectedRowIndex,0).toString());
+      jLabel12.setText(model.getValueAt(selectedRowIndex,1).toString());
+       jLabel13.setText(model.getValueAt(selectedRowIndex,2).toString());
+       jLabel14.setText(model.getValueAt(selectedRowIndex,3).toString());
+       jLabel15.setText(model.getValueAt(selectedRowIndex,4).toString());
+       jTextField2.setText(model.getValueAt(selectedRowIndex,5).toString());
+       jTextField3.setText(model.getValueAt(selectedRowIndex,6).toString());
        jTextField4.setText(model.getValueAt(selectedRowIndex,7).toString());
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+         conn = DbAccess.ConnectDb();
+       try{
+           if(conn!=null){
+               CallableStatement cs = null;
+              cs = conn.prepareCall("call SHOW_WYP_ADM(?)");
+        cs.registerOutParameter(1, OracleTypes.CURSOR);
+        cs.execute();
+        ResultSet cursor = ((OracleCallableStatement) cs).getCursor(1);
+        int ilosc = 0;
+               int i=0;
+               while(cursor.next()){
+                   jTable1.getModel().setValueAt(cursor.getString(1),i,0);
+                   jTable1.getModel().setValueAt(cursor.getString(2)+" "+cursor.getString(3),i,1);
+                   jTable1.getModel().setValueAt(cursor.getString(4),i,2);
+                   jTable1.getModel().setValueAt(cursor.getString(5),i,3);
+                   jTable1.getModel().setValueAt(cursor.getString(6)+" "+cursor.getString(7),i,4);
+                   jTable1.getModel().setValueAt(cursor.getDate(8),i,5);
+                   jTable1.getModel().setValueAt(cursor.getDate(9),i,6);
+                   jTable1.getModel().setValueAt(cursor.getString(10),i,7);
+           
+                   i++;
+               }
+           }
+       } catch (SQLException ex){
+           Logger.getLogger(Regulamin.class.getName()).log(Level.SEVERE,null,ex);
+       }
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
@@ -350,7 +382,6 @@ public class Wypozyczenia_administrator extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
