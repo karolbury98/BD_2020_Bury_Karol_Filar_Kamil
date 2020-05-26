@@ -4,13 +4,21 @@
  * and open the template in the editor.
  */
 package biblioteka;
+    
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import oracle.jdbc.OraclePreparedStatement;
+import oracle.jdbc.OracleResultSet;
 
 /**
  *
  * @author Kamil
  */
 public class Biblioteka_dodajautora extends javax.swing.JFrame {
-
+        Connection conn = null;
+    CallableStatement stmt = null;
+    OraclePreparedStatement pst = null;
+    OracleResultSet rs = null;
     /**
      * Creates new form Biblioteka_dodajautora
      */
@@ -39,6 +47,7 @@ public class Biblioteka_dodajautora extends javax.swing.JFrame {
         jTextField4 = new javax.swing.JTextField();
         jTextField5 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -61,18 +70,15 @@ public class Biblioteka_dodajautora extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel6.setText("Data śmierci:");
 
-        jTextField1.setText("jTextField1");
-
-        jTextField2.setText("jTextField2");
-
-        jTextField3.setText("jTextField3");
-
-        jTextField4.setText("jTextField4");
-
-        jTextField5.setText("jTextField5");
-
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton1.setText("Powrót");
+
+        jButton2.setText("Dodaj");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -110,6 +116,8 @@ public class Biblioteka_dodajautora extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(199, 199, 199)
                 .addComponent(jButton1)
+                .addGap(46, 46, 46)
+                .addComponent(jButton2)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -138,12 +146,49 @@ public class Biblioteka_dodajautora extends javax.swing.JFrame {
                     .addComponent(jLabel6)
                     .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+         conn = DbAccess.ConnectDb();
+        try{
+           
+        String sql = "select IDAUTORA.nextval from DUAL";        
+        pst = (OraclePreparedStatement) conn.prepareStatement(sql);
+       rs = (OracleResultSet) pst.executeQuery();
+           while(rs.next()){
+            int nextID_from_seq;
+            nextID_from_seq = rs.getInt(1);
+                System.out.println(nextID_from_seq);
+                  stmt = conn.prepareCall("{call ADD_AUTOR(?,?,?,?,?,?,?)}");
+           
+          int idautor = nextID_from_seq;
+       
+          
+            stmt.setInt(1,idautor);
+            stmt.setString(2,jTextField1.getText());
+            stmt.setString(3,jTextField2.getText());
+            stmt.setString(4,jTextField3.getText());
+            stmt.setString(5,jTextField4.getText());
+            stmt.setString(6,jTextField5.getText());
+            
+           
+           stmt.registerOutParameter(7, java.sql.Types.VARCHAR);
+            stmt.executeUpdate();
+            String result = stmt.getString(7);
+            System.out.println("Dodano autora: "+result);
+           }
+         } catch(Exception e){
+            System.out.println(e);
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -182,6 +227,7 @@ public class Biblioteka_dodajautora extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
