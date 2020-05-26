@@ -136,7 +136,7 @@ public class Moje_wypozyczenia extends javax.swing.JFrame {
            if(conn!=null){
         CallableStatement cs = null;
         cs = conn.prepareCall("call SHOW_WYPOZYCZENIA(?,?)");
-        cs.setInt(1,User_login.getInstance().getID_Konta());
+        cs.setInt(1,User_login.getInstance().getID_Klienta());
         cs.registerOutParameter(2, OracleTypes.CURSOR);
         cs.execute();
         ResultSet cursor = ((OracleCallableStatement) cs).getCursor(2);
@@ -145,8 +145,8 @@ public class Moje_wypozyczenia extends javax.swing.JFrame {
                    jTable1.getModel().setValueAt(cursor.getString(1),i,0);
                    jTable1.getModel().setValueAt(cursor.getString(2),i,1);
                    jTable1.getModel().setValueAt(cursor.getString(3)+" "+cursor.getString(4),i,2);
-                   jTable1.getModel().setValueAt(cursor.getString(5),i,3);
-                   jTable1.getModel().setValueAt(cursor.getString(6),i,4);
+                   jTable1.getModel().setValueAt(cursor.getDate(5),i,3);
+                   jTable1.getModel().setValueAt(cursor.getDate(6),i,4);
                    jTable1.getModel().setValueAt(cursor.getString(7),i,5);
                    i++;
                }

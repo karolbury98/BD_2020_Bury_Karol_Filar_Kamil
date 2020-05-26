@@ -17,8 +17,12 @@ import oracle.jdbc.OracleResultSet;
 public class Logowanie extends javax.swing.JFrame {
         Connection conn = null;
         OraclePreparedStatement pst = null;
+        OraclePreparedStatement pst2 = null;
         OracleResultSet rs = null;
+         OracleResultSet rs2 = null;
         public int ID_KONTA;
+        public int ID_KLIENTA;
+        public int ID_ROLI;
         
     /**
      * Creates new form Logowanie
@@ -151,8 +155,21 @@ public class Logowanie extends javax.swing.JFrame {
                
              ID_KONTA = rs.getInt("ID_KONTA");
              User_login.INSTANCE.setID_Konta(rs.getInt("ID_KONTA"));
+             ID_ROLI = rs.getInt("ID_ROLI");
+             User_login.INSTANCE.setID_Roli(rs.getInt("ID_ROLI"));
+             if(ID_ROLI == 2){
+                 String sql2 = "select * from KLIENCI WHERE ID_KONTA ="+ID_KONTA;
+                 pst2 = (OraclePreparedStatement) conn.prepareStatement(sql2);
+                 rs2 = (OracleResultSet) pst2.executeQuery();
+                 if(rs2.next()){
+                     ID_KLIENTA = rs2.getInt("ID_KLIENTA");
+                     User_login.INSTANCE.setID_Klienta(rs2.getInt("ID_KLIENTA"));
+                    
+                 }
+             }
              
-                JOptionPane.showMessageDialog(null,"Zalogowano pomyślnie "+ID_KONTA);
+             
+                JOptionPane.showMessageDialog(null,"Zalogowano pomyślnie "+ID_KONTA+" ID klienta "+ID_KLIENTA);
                  new Biblioteka_main().setVisible(true); 
                  super.dispose();
                 

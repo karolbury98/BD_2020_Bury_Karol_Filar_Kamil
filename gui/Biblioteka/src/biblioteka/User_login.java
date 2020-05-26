@@ -12,14 +12,39 @@ package biblioteka;
 public class User_login {
     public static final User_login INSTANCE = new User_login();
     public int ID_Konta;
+    public int ID_Klienta;
+    public int ID_Roli;
  
     
     
-    public User_login(int ID_Konta) {
+    public User_login(int ID_Konta, int ID_Klienta, int ID_Roli) {
 
         this.ID_Konta = ID_Konta;
+        this.ID_Klienta = ID_Klienta;
+        this.ID_Roli = ID_Roli;
+        
         
     }
+
+    public int getID_Roli() {
+        return ID_Roli;
+    }
+
+    public void setID_Roli(int ID_Roli) {
+        this.ID_Roli = ID_Roli;
+    }
+    
+    
+
+    public int getID_Klienta() {
+        return ID_Klienta;
+    }
+
+    public void setID_Klienta(int ID_Klienta) {
+        this.ID_Klienta = ID_Klienta;
+    }
+    
+    
 
     public int getID_Konta() {
         return ID_Konta;
