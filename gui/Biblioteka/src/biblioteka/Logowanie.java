@@ -7,13 +7,16 @@ package biblioteka;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import oracle.jdbc.OracleCallableStatement;
 import oracle.jdbc.OraclePreparedStatement;
 import oracle.jdbc.OracleResultSet;
+import oracle.jdbc.OracleTypes;
 import oracle.jdbc.datasource.OracleDataSource;
 
 /**
@@ -146,7 +149,7 @@ public class Logowanie extends javax.swing.JFrame {
         
       
        conn = DbAccess.ConnectDb();
-       
+       /*
        try{
            
             String sql = "select * from LOGOWANIE where LOGIN=? and HASLO=?";
@@ -190,25 +193,53 @@ public class Logowanie extends javax.swing.JFrame {
             System.out.println(e);
             e.printStackTrace();
         }
+       */
        
-       /*
+       
        try{
-       CallableStatement callableStmt = null;
-       
-
-        callableStmt = conn.prepareCall("{ ? = call log_in()}");
-        
-        callableStmt.registerOutParameter(1, Types.VARCHAR);
-        callableStmt.setString(1, login.getText());
-        callableStmt.setString(2, haslo.getText());
-        callableStmt.executeUpdate();
-        String tekst = callableStmt.getString(1);
-        System.out.println(tekst);
-    
-    }catch (SQLException ex){
+           CallableStatement cs = null;
+           cs = conn.prepareCall("call LOGIN(?,?,?)");
+           cs.setString(1,login.getText());
+           cs.setString(2, haslo.getText());
+            cs.registerOutParameter(3, OracleTypes.CURSOR);
+            cs.execute();
+           
+           rs = (OracleResultSet) cs.executeQuery();
+           
+           if(rs!=null){
+              ResultSet cursor = ((OracleCallableStatement) cs).getCursor(3);
+               while(cursor.next()){
+                   ID_KONTA = cursor.getInt(1);
+                   User_login.INSTANCE.setID_Konta(cursor.getInt(1));
+                   ID_ROLI = cursor.getInt(2);
+                   User_login.INSTANCE.setID_Roli(cursor.getInt(2));
+                  CallableStatement cs2 = null;
+                  cs2 = conn.prepareCall("call GET_ID_KLIENTA_LOGIN(?,?)");
+               
+                  cs2.setInt(1,ID_KONTA);
+                   cs2.registerOutParameter(2, OracleTypes.CURSOR);
+                   rs2 = (OracleResultSet) cs2.executeQuery();
+                   if(rs2!=null){
+                       ResultSet cursor2 = ((OracleCallableStatement) cs2).getCursor(2);
+                       while(cursor2.next()){
+                           if(ID_ROLI == 2){
+                       ID_KLIENTA = cursor2.getInt(1);
+                        User_login.INSTANCE.setID_Klienta(cursor2.getInt(1));
+                           }
+                       }
+                   }
+               }
+               JOptionPane.showMessageDialog(null,"Zalogowano pomyślnie "+ID_KONTA+" ID klienta "+ID_KLIENTA);
+             //JOptionPane.showMessageDialog(null,"zalogowano");
+                 new Biblioteka_main().setVisible(true); 
+                 super.dispose();
+                
+            } else{
+                JOptionPane.showMessageDialog(null,"Zła nazwa użytkownika lub hasło");
+           }
+       }catch (SQLException ex){
            Logger.getLogger(Regulamin.class.getName()).log(Level.SEVERE,null,ex);
        }
-       */
     }//GEN-LAST:event_jButton1ActionPerformed
 
   

@@ -373,7 +373,7 @@ Connection conn = null;
     }//GEN-LAST:event_formWindowOpened
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-      /*
+      
         conn = DbAccess.ConnectDb();
         String s1 = jTextField3.getText();
         String s2 = jTextField4.getText();
@@ -382,26 +382,32 @@ Connection conn = null;
            if(conn!=null){
                 CallableStatement cs = null;
                 
-            // int idwyp = String.valueOf(jLabel11.getText());
+           
             int idwyp = Integer.valueOf(jLabel11.getText());
             int naleznosc = Integer.valueOf(s2);
                System.out.println(idwyp);
-         cs = conn.prepareCall("call UPDATE_KSIAZKI_ADM(?,?,?)");
+         cs = conn.prepareCall("call UPDATE_WYP_ADM(?,?,?)");
             cs.setInt(1,idwyp );
                
-                  // Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(s1);
-                  //LocalDate date = LocalDate.parse(s1);
-                  DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                 LocalDate date = LocalDate.parse(s1, formatter);
+               try {
+                   Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(s1);
+                  
+                   java.sql.Date data = new java.sql.Date(date1.getTime());
+                    cs.setDate(2, data);
+         
+               } catch (ParseException ex) {
+                   Logger.getLogger(Wypozyczenia_administrator.class.getName()).log(Level.SEVERE, null, ex);
+               }
                
-         cs.setString(2, String.valueOf(date));
+               
+        
          cs.setInt(3, naleznosc);
          cs.execute();
            }
                 } catch (SQLException ex){
            Logger.getLogger(Regulamin.class.getName()).log(Level.SEVERE,null,ex);
        }
-        */
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
