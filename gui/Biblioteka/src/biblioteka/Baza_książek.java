@@ -8,10 +8,11 @@ package biblioteka;
 import static biblioteka.DbAccess.ConnectDb;
 import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.Instant;
+import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
@@ -21,15 +22,30 @@ import oracle.jdbc.OracleCallableStatement;
 import oracle.jdbc.OracleTypes;
 import java.time.format.DateTimeFormatter;  
 import java.time.LocalDateTime;  
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.util.Calendar;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.TableRowSorter;
+import oracle.jdbc.OraclePreparedStatement;
+import oracle.jdbc.OracleResultSet;
+
+import java.util.Date;
 /**
  *
  * @author Karol
  */
 public class Baza_książek extends javax.swing.JFrame {
 Connection conn = null;
+CallableStatement stmt = null;
+    OraclePreparedStatement pst = null;
+    OracleResultSet rs = null;
+     OraclePreparedStatement pst2 = null;
+    OracleResultSet rs2 = null;
+public int idksiazki;
+public int idwypozyczenia;
+public int idkary;
             
     /**
      * Creates new form Baza_książek
@@ -41,6 +57,10 @@ Connection conn = null;
     public Baza_książek() {
         initComponents();
         jTable1.setAutoCreateRowSorter(true);
+        jTextField1.setEditable(false);
+         jTextField2.setEditable(false);
+         jTextField3.setEditable(false);
+         jTextField4.setEditable(false);
     }
 
     /**
@@ -274,6 +294,7 @@ Connection conn = null;
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // warunek WHERE ID_KONTA = ID_KONTA żeby było przypisanie do bazy danych
+        /*
         String tytul = jTextField1.getText();
         String kategoria = jTextField2.getText();
         String autor = jTextField3.getText();
@@ -292,6 +313,79 @@ Connection conn = null;
                 Logger.getLogger(Baza_książek.class.getName()).log(Level.SEVERE, null, ex);
             }
            }
+        */
+        conn = DbAccess.ConnectDb();
+         try{
+           if(conn!=null){
+                CallableStatement cs = null;
+                  cs = conn.prepareCall("call GET_ID_KSIAZKI_UPDATE(?,?)");
+              cs.setString(1, jTextField1.getText());
+              cs.registerOutParameter(2, OracleTypes.CURSOR);
+        cs.execute();
+        ResultSet cursor = ((OracleCallableStatement) cs).getCursor(2);
+        while(cursor.next()){
+            System.out.println("ID KSIAZKI "+cursor.getInt(1));
+                idksiazki = cursor.getInt(1);
+        
+        }
+          }
+                } catch (SQLException ex){
+           Logger.getLogger(Regulamin.class.getName()).log(Level.SEVERE,null,ex);
+       }
+         
+         try{
+          if(conn!=null){
+        //                 String sql2 = "select IDKARY.nextval from DUAL";
+        //           pst2 = (OraclePreparedStatement) conn.prepareStatement(sql2);
+      // rs2 = (OracleResultSet) pst2.executeQuery();
+     //  while(rs2.next()){
+         //  int nextID;
+       //    nextID = rs2.getInt(1);
+       //    idkary = nextID;
+           
+       //}
+                   String sql = "select IDWYPOZYCZENIA.nextval from DUAL";        
+        pst = (OraclePreparedStatement) conn.prepareStatement(sql);
+       rs = (OracleResultSet) pst.executeQuery();
+           while(rs.next()){
+            int nextID_from_seq;
+            nextID_from_seq = rs.getInt(1);
+                System.out.println(nextID_from_seq);
+                  stmt = conn.prepareCall("call ADD_WYPOZYCZENIE(?,?,?,?,?,?,?,?,?)");
+                  
+                  idwypozyczenia = nextID_from_seq;
+                  
+                  stmt.setInt(1,idwypozyczenia);
+                  stmt.setInt(2,idksiazki);
+                  int idpracownika = 1; //Domyślnie administrator
+                  stmt.setInt(3, idpracownika);
+                  stmt.setInt(4,User_login.getInstance().getID_Klienta());
+                  Calendar cal = Calendar.getInstance();
+                  Date currentDate = new Date();
+                  cal.setTime(currentDate);
+                  
+                  java.sql.Date dataWyp = new java.sql.Date(cal.getTimeInMillis());
+                  stmt.setDate(5, dataWyp);
+                  cal.add(Calendar.DATE, 14);
+                  java.sql.Date dataZwrotu = new java.sql.Date(cal.getTimeInMillis());
+                  
+                  stmt.setDate(6, dataZwrotu);
+                  int karaID = 5;
+                  stmt.setInt(7, karaID);
+                  System.out.println("id kary "+idkary);
+                  int naleznosc = 0; //Naleznosc na początku wynosi 0
+                  stmt.setInt(8, naleznosc);
+                   stmt.registerOutParameter(9, java.sql.Types.VARCHAR);
+            stmt.executeUpdate();
+            String result = stmt.getString(9);
+            System.out.println("Dodano wypożyczenie: "+result);
+               
+                  
+           }
+         }            
+         } catch (SQLException ex){
+           Logger.getLogger(Regulamin.class.getName()).log(Level.SEVERE,null,ex);
+       }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
