@@ -77,16 +77,7 @@ public class Panel_administratora extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Tytuł", "Kategoria", "Autor", "Ilość egzemplarzy", "Dostępność"
@@ -342,10 +333,12 @@ public class Panel_administratora extends javax.swing.JFrame {
         int ilosc = 0;
                int i=0;
                while(cursor.next()){
-                   jTable1.getModel().setValueAt(cursor.getString(1),i,0);
-                   jTable1.getModel().setValueAt(cursor.getString(2),i,1);
-                   jTable1.getModel().setValueAt(cursor.getString(3)+" "+cursor.getString(4),i,2);
-                   jTable1.getModel().setValueAt(cursor.getInt(5),i,3);
+                   DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+                  model.addRow(new Object[]{cursor.getString(1), cursor.getString(2), cursor.getString(3)+" "+cursor.getString(4),cursor.getInt(5),ilosc});
+                 //  jTable1.getModel().setValueAt(cursor.getString(1),i,0);
+                  // jTable1.getModel().setValueAt(cursor.getString(2),i,1);
+                 //  jTable1.getModel().setValueAt(cursor.getString(3)+" "+cursor.getString(4),i,2);
+                 //  jTable1.getModel().setValueAt(cursor.getInt(5),i,3);
                    ilosc = cursor.getInt(5);
                    if (ilosc <= 3) {
                    jTable1.getModel().setValueAt("Niedostępna",i,4);

@@ -98,12 +98,7 @@ public int idkary;
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Tytuł", "Kategoria", "Autor", "Ilość egzemplarzy"
@@ -235,12 +230,9 @@ public int idkary;
                     .addGroup(layout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(14, 14, 14))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                            .addComponent(jLabel3)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(13, 13, 13)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
                             .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -280,11 +272,13 @@ public int idkary;
                
                int i=0;
                while(cursor.next()){
-                   jTable1.getModel().setValueAt(cursor.getString(1),i,0);
-                   jTable1.getModel().setValueAt(cursor.getString(2),i,1);
-                   jTable1.getModel().setValueAt(cursor.getString(3)+" "+cursor.getString(4),i,2);
-                   jTable1.getModel().setValueAt(cursor.getString(5),i,3);                 
-                   i++;
+                   DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+                  model.addRow(new Object[]{cursor.getString(1), cursor.getString(2), cursor.getString(3)+" "+cursor.getString(4),cursor.getString(5)});
+                //   jTable1.getModel().setValueAt(cursor.getString(1),i,0);
+                  // jTable1.getModel().setValueAt(cursor.getString(2),i,1);
+                 //  jTable1.getModel().setValueAt(cursor.getString(3)+" "+cursor.getString(4),i,2);
+                 //  jTable1.getModel().setValueAt(cursor.getString(5),i,3);                 
+                //   i++;
                }
            }
        } catch (SQLException ex){

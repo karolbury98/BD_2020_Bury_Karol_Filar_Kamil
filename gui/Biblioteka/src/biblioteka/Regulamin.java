@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 import oracle.jdbc.OracleCallableStatement;
 import oracle.jdbc.OracleTypes;
 
@@ -63,12 +64,7 @@ public class Regulamin extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "Typ kary", "Należność"
@@ -195,9 +191,11 @@ public class Regulamin extends javax.swing.JFrame {
                
                int i=0;
                while(cursor.next()){
-                   jTable1.getModel().setValueAt(cursor.getString(1),i,0);
-                   jTable1.getModel().setValueAt(cursor.getString(2),i,1);            
-                   i++;
+                   DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+                  model.addRow(new Object[]{cursor.getString(1), cursor.getString(2)});
+                 //  jTable1.getModel().setValueAt(cursor.getString(1),i,0);
+                //   jTable1.getModel().setValueAt(cursor.getString(2),i,1);            
+                 //  i++;
                }
            }
        } catch (SQLException ex){

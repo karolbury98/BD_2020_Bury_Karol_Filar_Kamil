@@ -60,12 +60,7 @@ public class Moje_wypozyczenia extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "Nazwa książki", "Kategoria", "Autor", "Data wypożyczenia", "Data zwrotu", "Należność"
@@ -142,13 +137,15 @@ public class Moje_wypozyczenia extends javax.swing.JFrame {
         ResultSet cursor = ((OracleCallableStatement) cs).getCursor(2);
                int i=0;
                while(cursor.next()){
-                   jTable1.getModel().setValueAt(cursor.getString(1),i,0);
-                   jTable1.getModel().setValueAt(cursor.getString(2),i,1);
-                   jTable1.getModel().setValueAt(cursor.getString(3)+" "+cursor.getString(4),i,2);
-                   jTable1.getModel().setValueAt(cursor.getDate(5),i,3);
-                   jTable1.getModel().setValueAt(cursor.getDate(6),i,4);
-                   jTable1.getModel().setValueAt(cursor.getString(7),i,5);
-                   i++;
+                   DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+                  model.addRow(new Object[]{cursor.getString(1), cursor.getString(2), cursor.getString(3)+" "+cursor.getString(4),cursor.getDate(5),cursor.getDate(6),cursor.getString(7)});
+                  // jTable1.getModel().setValueAt(cursor.getString(1),i,0);
+                  // jTable1.getModel().setValueAt(cursor.getString(2),i,1);
+                  // jTable1.getModel().setValueAt(cursor.getString(3)+" "+cursor.getString(4),i,2);
+                 //  jTable1.getModel().setValueAt(cursor.getDate(5),i,3);
+                  // jTable1.getModel().setValueAt(cursor.getDate(6),i,4);
+                 //  jTable1.getModel().setValueAt(cursor.getString(7),i,5);
+                 //  i++;
                }
            }
        } catch (SQLException ex){

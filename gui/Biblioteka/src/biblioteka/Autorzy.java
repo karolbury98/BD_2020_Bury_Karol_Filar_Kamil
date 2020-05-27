@@ -61,13 +61,7 @@ public class Autorzy extends javax.swing.JFrame {
         jTable1.setAutoCreateRowSorter(true);
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Imię", "Nazwisko", "Narodowość", "Data urodzenia", "Data śmierci"
@@ -146,13 +140,16 @@ public class Autorzy extends javax.swing.JFrame {
                
                int i=0;
                while(cursor.next()){
-                   jTable1.getModel().setValueAt(cursor.getString(1),i,0);
-                   jTable1.getModel().setValueAt(cursor.getString(2),i,1);  
-                    jTable1.getModel().setValueAt(cursor.getString(3),i,2);
-                   jTable1.getModel().setValueAt(cursor.getDate(4),i,3); 
-                    jTable1.getModel().setValueAt(cursor.getDate(5),i,4);
+                  DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+                  model.addRow(new Object[]{cursor.getString(1), cursor.getString(2), cursor.getString(3),cursor.getDate(4),cursor.getDate(5)});
+              
+                  // jTable1.getModel().setValueAt(cursor.getString(1),i,0);
+                 //  jTable1.getModel().setValueAt(cursor.getString(2),i,1);  
+                 //   jTable1.getModel().setValueAt(cursor.getString(3),i,2);
+                 //  jTable1.getModel().setValueAt(cursor.getDate(4),i,3); 
+                 //   jTable1.getModel().setValueAt(cursor.getDate(5),i,4);
                    
-                   i++;
+               //    i++;
                }
            }
        } catch (SQLException ex){

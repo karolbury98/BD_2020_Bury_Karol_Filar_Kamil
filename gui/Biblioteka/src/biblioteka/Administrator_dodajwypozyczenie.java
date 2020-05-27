@@ -15,6 +15,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import oracle.jdbc.OracleCallableStatement;
 import oracle.jdbc.OraclePreparedStatement;
@@ -79,10 +82,7 @@ public int idklienta;
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "ID", "Imie", "Nazwisko", "Nr telefonu"
@@ -97,10 +97,7 @@ public int idklienta;
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "ID", "Tytuł", "Kategoria", "Autor", "Ilość egzemplarzy"
@@ -219,12 +216,14 @@ public int idklienta;
                
                int i=0;
                while(cursor.next()){
-                   jTable1.getModel().setValueAt(cursor.getString(1),i,0);
-                   jTable1.getModel().setValueAt(cursor.getString(2),i,1);
-                   jTable1.getModel().setValueAt(cursor.getString(3),i,2);
-                   jTable1.getModel().setValueAt(cursor.getString(4),i,3);
+                   DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+                  model.addRow(new Object[]{cursor.getString(1), cursor.getString(2), cursor.getString(3),cursor.getString(4)});
+                  // jTable1.getModel().setValueAt(cursor.getString(1),i,0);
+                 //  jTable1.getModel().setValueAt(cursor.getString(2),i,1);
+                  // jTable1.getModel().setValueAt(cursor.getString(3),i,2);
+                 //  jTable1.getModel().setValueAt(cursor.getString(4),i,3);
                                   
-                   i++;
+                  // i++;
                }
            }
        } catch (SQLException ex){
@@ -240,12 +239,14 @@ public int idklienta;
                
                int i=0;
                while(cursor.next()){
-                   jTable2.getModel().setValueAt(cursor.getString(1),i,0);
-                   jTable2.getModel().setValueAt(cursor.getString(2),i,1);
-                   jTable2.getModel().setValueAt(cursor.getString(3),i,2);
-                   jTable2.getModel().setValueAt(cursor.getString(4)+" "+cursor.getString(5),i,3);
-                   jTable2.getModel().setValueAt(cursor.getString(6),i,4);                 
-                   i++;
+                   DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+                  model.addRow(new Object[]{cursor.getString(1), cursor.getString(2), cursor.getString(3),cursor.getString(4)+" "+cursor.getString(5),cursor.getString(6)});
+                  // jTable2.getModel().setValueAt(cursor.getString(1),i,0);
+                 //  jTable2.getModel().setValueAt(cursor.getString(2),i,1);
+                 //  jTable2.getModel().setValueAt(cursor.getString(3),i,2);
+                 //  jTable2.getModel().setValueAt(cursor.getString(4)+" "+cursor.getString(5),i,3);
+                  // jTable2.getModel().setValueAt(cursor.getString(6),i,4);                 
+                 //  i++;
                }
            }
        } catch (SQLException ex){
@@ -279,7 +280,15 @@ public int idklienta;
         idksiazki = Integer.valueOf(jTextField11.getText());
         String dataWyp = jTextField1.getText();
         String dataZwr = jTextField2.getText();
-        try{
+        String regex = "^\\d{4}-\\d{2}-\\d{2}$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(dataWyp);
+         Matcher matcher2 = pattern.matcher(dataZwr);
+      boolean bool = matcher.matches();
+      boolean bool2 = matcher2.matches();
+      if(bool && bool2) {
+         System.out.println("Data jest poprawna");
+      try{
           if(conn!=null){
                String sql = "select IDWYPOZYCZENIA.nextval from DUAL";        
         pst = (OraclePreparedStatement) conn.prepareStatement(sql);
@@ -307,21 +316,10 @@ public int idklienta;
                } catch (ParseException ex) {
                    Logger.getLogger(Administrator_dodajwypozyczenie.class.getName()).log(Level.SEVERE, null, ex);
                }
-                  /*
-                  Calendar cal = Calendar.getInstance();
-                  Date currentDate = new Date();
-                  cal.setTime(currentDate);
-                  
-                  java.sql.Date dataWyp = new java.sql.Date(cal.getTimeInMillis());
-                  stmt.setDate(5, dataWyp);
-                  cal.add(Calendar.DATE, 14);
-                  java.sql.Date dataZwrotu = new java.sql.Date(cal.getTimeInMillis());
-                  
-                  stmt.setDate(6, dataZwrotu);
-                  */
+                 
                   int karaID = 5;
                   stmt.setInt(7, karaID);
-                  System.out.println("id kary "+idkary);
+                  System.out.println("id kary "+karaID);
                   int naleznosc = 0; //Naleznosc na początku wynosi 0
                   stmt.setInt(8, naleznosc);
                    stmt.registerOutParameter(9, java.sql.Types.VARCHAR);
@@ -334,6 +332,10 @@ public int idklienta;
            } catch (SQLException ex){
            Logger.getLogger(Administrator_dodajwypozyczenie.class.getName()).log(Level.SEVERE,null,ex);
        }
+      } else {
+         System.out.println("Data jest niepoprawna");
+         JOptionPane.showMessageDialog(null,"Podaj datę w formacie yyyy-MM-dd");
+      }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

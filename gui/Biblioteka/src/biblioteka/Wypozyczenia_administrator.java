@@ -21,6 +21,9 @@ import javax.swing.table.TableRowSorter;
 import oracle.jdbc.OracleCallableStatement;
 import oracle.jdbc.OracleTypes;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -80,10 +83,7 @@ Connection conn = null;
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Nr wypożyczenia", "Dane klienta", "Nr tel klienta", "Tytuł książki", "Autor", "Data wypożyczenia", "Data zwrotu", "Należność"
@@ -355,16 +355,18 @@ Connection conn = null;
         int ilosc = 0;
                int i=0;
                while(cursor.next()){
-                   jTable1.getModel().setValueAt(cursor.getString(1),i,0);
-                   jTable1.getModel().setValueAt(cursor.getString(2)+" "+cursor.getString(3),i,1);
-                   jTable1.getModel().setValueAt(cursor.getString(4),i,2);
-                   jTable1.getModel().setValueAt(cursor.getString(5),i,3);
-                   jTable1.getModel().setValueAt(cursor.getString(6)+" "+cursor.getString(7),i,4);
-                   jTable1.getModel().setValueAt(cursor.getDate(8),i,5);
-                   jTable1.getModel().setValueAt(cursor.getDate(9),i,6);
-                   jTable1.getModel().setValueAt(cursor.getString(10),i,7);
+                   DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+                  model.addRow(new Object[]{cursor.getString(1), cursor.getString(2)+" "+cursor.getString(3),cursor.getString(4),cursor.getString(5),cursor.getString(6)+" "+cursor.getString(7),cursor.getDate(8),cursor.getDate(9),cursor.getString(10)});
+                   //jTable1.getModel().setValueAt(cursor.getString(1),i,0);
+                  // jTable1.getModel().setValueAt(cursor.getString(2)+" "+cursor.getString(3),i,1);
+                 //  jTable1.getModel().setValueAt(cursor.getString(4),i,2);
+                 //  jTable1.getModel().setValueAt(cursor.getString(5),i,3);
+                //   jTable1.getModel().setValueAt(cursor.getString(6)+" "+cursor.getString(7),i,4);
+                //   jTable1.getModel().setValueAt(cursor.getDate(8),i,5);
+                 //  jTable1.getModel().setValueAt(cursor.getDate(9),i,6);
+                //   jTable1.getModel().setValueAt(cursor.getString(10),i,7);
            
-                   i++;
+                 //  i++;
                }
            }
        } catch (SQLException ex){
@@ -377,7 +379,14 @@ Connection conn = null;
         conn = DbAccess.ConnectDb();
         String s1 = jTextField3.getText();
         String s2 = jTextField4.getText();
-        
+         String regex = "^\\d{4}-\\d{2}-\\d{2}$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(s1);
+       
+      boolean bool = matcher.matches();
+    
+      if(bool) {
+         System.out.println("Data jest poprawna");
         try{
            if(conn!=null){
                 CallableStatement cs = null;
@@ -407,7 +416,10 @@ Connection conn = null;
                 } catch (SQLException ex){
            Logger.getLogger(Wypozyczenia_administrator.class.getName()).log(Level.SEVERE,null,ex);
        }
-        
+        } else {
+         System.out.println("Data jest niepoprawna");
+         JOptionPane.showMessageDialog(null,"Podaj datę w formacie yyyy-MM-dd");
+      }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed

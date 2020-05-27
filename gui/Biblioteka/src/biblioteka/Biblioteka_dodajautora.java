@@ -7,6 +7,9 @@ package biblioteka;
     
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
 import oracle.jdbc.OraclePreparedStatement;
 import oracle.jdbc.OracleResultSet;
 
@@ -162,6 +165,16 @@ public class Biblioteka_dodajautora extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
          conn = DbAccess.ConnectDb();
+         String s1 = jTextField4.getText();
+         String s2 = jTextField5.getText();
+         String regex = "^\\d{4}-\\d{2}-\\d{2}$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(s1);
+         Matcher matcher2 = pattern.matcher(s2);
+      boolean bool = matcher.matches();
+      boolean bool2 = matcher2.matches();
+      if(bool && bool2) {
+         System.out.println("Data jest poprawna");
         try{
            
         String sql = "select IDAUTORA.nextval from DUAL";        
@@ -193,6 +206,10 @@ public class Biblioteka_dodajautora extends javax.swing.JFrame {
             System.out.println(e);
             e.printStackTrace();
         }
+        } else {
+         System.out.println("Data jest niepoprawna");
+         JOptionPane.showMessageDialog(null,"Podaj datę w formacie yyyy-MM-dd");
+      }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

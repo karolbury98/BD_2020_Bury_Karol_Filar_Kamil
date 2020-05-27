@@ -60,12 +60,7 @@ public class Wydawnictwa extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Nazwa", "Miejscowość", "Ulica", "Numer budynku"
@@ -139,13 +134,15 @@ public class Wydawnictwa extends javax.swing.JFrame {
         cs.execute();
         ResultSet cursor = ((OracleCallableStatement) cs).getCursor(1);
                
-               int i=0;
+             //  int i=0;
                while(cursor.next()){
-                   jTable1.getModel().setValueAt(cursor.getString(1),i,0);
-                   jTable1.getModel().setValueAt(cursor.getString(2),i,1);   
-                   jTable1.getModel().setValueAt(cursor.getString(3),i,2);   
-                   jTable1.getModel().setValueAt(cursor.getString(4),i,3);   
-                   i++;
+                   DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+                  model.addRow(new Object[]{cursor.getString(1), cursor.getString(2), cursor.getString(3),cursor.getString(4)});
+                 //  jTable1.getModel().setValueAt(cursor.getString(1),i,0);
+                //   jTable1.getModel().setValueAt(cursor.getString(2),i,1);   
+                  // jTable1.getModel().setValueAt(cursor.getString(3),i,2);   
+                  // jTable1.getModel().setValueAt(cursor.getString(4),i,3);   
+                  // i++;
                }
            }
        } catch (SQLException ex){
