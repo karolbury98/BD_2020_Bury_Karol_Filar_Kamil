@@ -177,8 +177,7 @@ public class Logowanie extends javax.swing.JFrame {
                    }
                }
                if(ID_KONTA != 0){
-               JOptionPane.showMessageDialog(null,"Zalogowano pomyślnie "+ID_KONTA+" ID klienta "+ID_KLIENTA);
-             
+                JOptionPane.showMessageDialog(null,"Zalogowano pomyślnie");
                  new Biblioteka_main().setVisible(true); 
                  super.dispose();
                } else{

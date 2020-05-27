@@ -5,10 +5,13 @@
  */
 package biblioteka;
 
+import java.math.BigDecimal;
+import java.sql.Array;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -357,16 +360,7 @@ Connection conn = null;
                while(cursor.next()){
                    DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
                   model.addRow(new Object[]{cursor.getString(1), cursor.getString(2)+" "+cursor.getString(3),cursor.getString(4),cursor.getString(5),cursor.getString(6)+" "+cursor.getString(7),cursor.getDate(8),cursor.getDate(9),cursor.getString(10)});
-                   //jTable1.getModel().setValueAt(cursor.getString(1),i,0);
-                  // jTable1.getModel().setValueAt(cursor.getString(2)+" "+cursor.getString(3),i,1);
-                 //  jTable1.getModel().setValueAt(cursor.getString(4),i,2);
-                 //  jTable1.getModel().setValueAt(cursor.getString(5),i,3);
-                //   jTable1.getModel().setValueAt(cursor.getString(6)+" "+cursor.getString(7),i,4);
-                //   jTable1.getModel().setValueAt(cursor.getDate(8),i,5);
-                 //  jTable1.getModel().setValueAt(cursor.getDate(9),i,6);
-                //   jTable1.getModel().setValueAt(cursor.getString(10),i,7);
-           
-                 //  i++;
+             
                }
            }
        } catch (SQLException ex){

@@ -5,10 +5,13 @@
  */
 package biblioteka;
 
+import java.math.BigDecimal;
+import java.sql.Array;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.RowFilter;
@@ -139,16 +142,43 @@ public class Moje_wypozyczenia extends javax.swing.JFrame {
                while(cursor.next()){
                    DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
                   model.addRow(new Object[]{cursor.getString(1), cursor.getString(2), cursor.getString(3)+" "+cursor.getString(4),cursor.getDate(5),cursor.getDate(6),cursor.getString(7)});
-                  // jTable1.getModel().setValueAt(cursor.getString(1),i,0);
-                  // jTable1.getModel().setValueAt(cursor.getString(2),i,1);
-                  // jTable1.getModel().setValueAt(cursor.getString(3)+" "+cursor.getString(4),i,2);
-                 //  jTable1.getModel().setValueAt(cursor.getDate(5),i,3);
-                  // jTable1.getModel().setValueAt(cursor.getDate(6),i,4);
-                 //  jTable1.getModel().setValueAt(cursor.getString(7),i,5);
-                 //  i++;
+                 
                }
            }
        } catch (SQLException ex){
+           Logger.getLogger(Moje_wypozyczenia.class.getName()).log(Level.SEVERE,null,ex);
+       }
+       
+        try{
+         CallableStatement callableStmt = conn.prepareCall("{ ? = call date_diff(?)}");
+        callableStmt.registerOutParameter(1,Types.ARRAY,"ROZNICA_DNI");
+        callableStmt.setInt(2,User_login.getInstance().getID_Klienta());
+        callableStmt.execute();
+        Array z = callableStmt.getArray (1);
+        BigDecimal[] zips = (BigDecimal[]) z.getArray();
+        for (int i = 0; i < zips.length; i++) {
+            
+            if(zips[i].intValueExact() <= 0 ) {
+
+          zips[i] = BigDecimal.valueOf(0);
+            }
+            System.out.println(zips[i]);
+        }
+       }catch (SQLException ex){
+           Logger.getLogger(Wypozyczenia_administrator.class.getName()).log(Level.SEVERE,null,ex);
+       }
+        
+        try{
+            if(conn!=null){
+        CallableStatement cs2 = null;
+        cs2 = conn.prepareCall("{ ? = call naleznosc()}");
+        cs2.registerOutParameter(1, Types.NUMERIC);
+        cs2.execute();
+        int kwota = cs2.getInt(1);
+        
+                
+            }
+        }catch (SQLException ex){
            Logger.getLogger(Moje_wypozyczenia.class.getName()).log(Level.SEVERE,null,ex);
        }
     }//GEN-LAST:event_formWindowOpened
