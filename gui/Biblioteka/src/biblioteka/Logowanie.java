@@ -64,12 +64,6 @@ public class Logowanie extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(0, 153, 0));
         jLabel1.setText("Biblioteka - logowanie");
 
-        login.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loginActionPerformed(evt);
-            }
-        });
-
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton1.setText("Zaloguj");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -149,54 +143,7 @@ public class Logowanie extends javax.swing.JFrame {
         
       
        conn = DbAccess.ConnectDb();
-       /*
-       try{
-           
-            String sql = "select * from LOGOWANIE where LOGIN=? and HASLO=?";
-            pst = (OraclePreparedStatement) conn.prepareStatement(sql);
-            
-            pst.setString(1, login.getText());
-            pst.setString(2, haslo.getText());
-           
-           
-         
-            rs = (OracleResultSet) pst.executeQuery();
-            if(rs.next()){
-               
-             ID_KONTA = rs.getInt("ID_KONTA");
-             User_login.INSTANCE.setID_Konta(rs.getInt("ID_KONTA"));
-             ID_ROLI = rs.getInt("ID_ROLI");
-             User_login.INSTANCE.setID_Roli(rs.getInt("ID_ROLI"));
-             if(ID_ROLI == 2){
-                 String sql2 = "select * from KLIENCI WHERE ID_KONTA ="+ID_KONTA;
-                 pst2 = (OraclePreparedStatement) conn.prepareStatement(sql2);
-                 rs2 = (OracleResultSet) pst2.executeQuery();
-                 if(rs2.next()){
-                     ID_KLIENTA = rs2.getInt("ID_KLIENTA");
-                     User_login.INSTANCE.setID_Klienta(rs2.getInt("ID_KLIENTA"));
-                    
-                 }
-             }
-             
-             
-                JOptionPane.showMessageDialog(null,"Zalogowano pomyślnie "+ID_KONTA+" ID klienta "+ID_KLIENTA);
-                 new Biblioteka_main().setVisible(true); 
-                 super.dispose();
-                
-            } else{
-                JOptionPane.showMessageDialog(null,"Zła nazwa użytkownika lub hasło");
-            }
-           conn.close();
-           
-        } catch(Exception e){
-            //JOptionPane.showMessageDialog(null,e);
-            System.out.println(e);
-            e.printStackTrace();
-        }
-       */
-       
-       
-       try{
+     try{
            CallableStatement cs = null;
            cs = conn.prepareCall("call LOGIN(?,?,?)");
            cs.setString(1,login.getText());
@@ -229,14 +176,15 @@ public class Logowanie extends javax.swing.JFrame {
                        }
                    }
                }
+               if(ID_KONTA != 0){
                JOptionPane.showMessageDialog(null,"Zalogowano pomyślnie "+ID_KONTA+" ID klienta "+ID_KLIENTA);
-             //JOptionPane.showMessageDialog(null,"zalogowano");
+             
                  new Biblioteka_main().setVisible(true); 
                  super.dispose();
-                
-            } else{
+               } else{
                 JOptionPane.showMessageDialog(null,"Zła nazwa użytkownika lub hasło");
-           }
+               }
+            } 
        }catch (SQLException ex){
            Logger.getLogger(Logowanie.class.getName()).log(Level.SEVERE,null,ex);
        }
@@ -245,10 +193,6 @@ public class Logowanie extends javax.swing.JFrame {
   
    
     
-    private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_loginActionPerformed
-
     /**
      * @param args the command line arguments
      */
