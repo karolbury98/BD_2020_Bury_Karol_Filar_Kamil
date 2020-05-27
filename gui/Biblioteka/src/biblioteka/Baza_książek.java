@@ -288,7 +288,7 @@ public int idkary;
                }
            }
        } catch (SQLException ex){
-           Logger.getLogger(Regulamin.class.getName()).log(Level.SEVERE,null,ex);
+           Logger.getLogger(Baza_książek.class.getName()).log(Level.SEVERE,null,ex);
        }
     }//GEN-LAST:event_formWindowOpened
 
@@ -330,7 +330,7 @@ public int idkary;
         }
           }
                 } catch (SQLException ex){
-           Logger.getLogger(Regulamin.class.getName()).log(Level.SEVERE,null,ex);
+           Logger.getLogger(Baza_książek.class.getName()).log(Level.SEVERE,null,ex);
        }
          
          try{
@@ -384,7 +384,7 @@ public int idkary;
            }
          }            
          } catch (SQLException ex){
-           Logger.getLogger(Regulamin.class.getName()).log(Level.SEVERE,null,ex);
+           Logger.getLogger(Baza_książek.class.getName()).log(Level.SEVERE,null,ex);
        }
     }//GEN-LAST:event_jButton2ActionPerformed
 

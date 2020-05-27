@@ -238,7 +238,7 @@ public class Logowanie extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null,"Zła nazwa użytkownika lub hasło");
            }
        }catch (SQLException ex){
-           Logger.getLogger(Regulamin.class.getName()).log(Level.SEVERE,null,ex);
+           Logger.getLogger(Logowanie.class.getName()).log(Level.SEVERE,null,ex);
        }
     }//GEN-LAST:event_jButton1ActionPerformed
 

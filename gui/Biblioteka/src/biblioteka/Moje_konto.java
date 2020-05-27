@@ -250,7 +250,7 @@ public class Moje_konto extends javax.swing.JFrame{
                }
            }
        } catch (SQLException ex){
-           Logger.getLogger(Regulamin.class.getName()).log(Level.SEVERE,null,ex);
+           Logger.getLogger(Moje_konto.class.getName()).log(Level.SEVERE,null,ex);
        }
     }//GEN-LAST:event_formWindowOpened
 
@@ -346,7 +346,7 @@ public class Moje_konto extends javax.swing.JFrame{
             //   System.out.println(count);
            }
        } catch (SQLException ex){
-           Logger.getLogger(Regulamin.class.getName()).log(Level.SEVERE,null,ex);
+           Logger.getLogger(Moje_konto.class.getName()).log(Level.SEVERE,null,ex);
        }
     }//GEN-LAST:event_jButton2ActionPerformed
 

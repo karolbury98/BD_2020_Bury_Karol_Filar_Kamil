@@ -228,7 +228,7 @@ public int idklienta;
                }
            }
        } catch (SQLException ex){
-           Logger.getLogger(Regulamin.class.getName()).log(Level.SEVERE,null,ex);
+           Logger.getLogger(Administrator_dodajwypozyczenie.class.getName()).log(Level.SEVERE,null,ex);
        }
        try{
            if(conn!=null){
@@ -249,7 +249,7 @@ public int idklienta;
                }
            }
        } catch (SQLException ex){
-           Logger.getLogger(Regulamin.class.getName()).log(Level.SEVERE,null,ex);
+           Logger.getLogger(Administrator_dodajwypozyczenie.class.getName()).log(Level.SEVERE,null,ex);
        }
     }//GEN-LAST:event_formWindowOpened
 
@@ -305,7 +305,7 @@ public int idklienta;
                   java.sql.Date data2 = new java.sql.Date(date2.getTime());
                   stmt.setDate(6,data2);
                } catch (ParseException ex) {
-                   Logger.getLogger(Wypozyczenia_administrator.class.getName()).log(Level.SEVERE, null, ex);
+                   Logger.getLogger(Administrator_dodajwypozyczenie.class.getName()).log(Level.SEVERE, null, ex);
                }
                   /*
                   Calendar cal = Calendar.getInstance();
@@ -332,7 +332,7 @@ public int idklienta;
           }
           }
            } catch (SQLException ex){
-           Logger.getLogger(Regulamin.class.getName()).log(Level.SEVERE,null,ex);
+           Logger.getLogger(Administrator_dodajwypozyczenie.class.getName()).log(Level.SEVERE,null,ex);
        }
     }//GEN-LAST:event_jButton1ActionPerformed
 

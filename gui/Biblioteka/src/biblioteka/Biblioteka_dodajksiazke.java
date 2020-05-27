@@ -62,7 +62,7 @@ public class Biblioteka_dodajksiazke extends javax.swing.JFrame {
              
            }
        } catch (SQLException ex){
-           Logger.getLogger(Regulamin.class.getName()).log(Level.SEVERE,null,ex);
+           Logger.getLogger(Biblioteka_dodajksiazke.class.getName()).log(Level.SEVERE,null,ex);
        }
         }
         
@@ -87,7 +87,7 @@ public class Biblioteka_dodajksiazke extends javax.swing.JFrame {
                }
            }
        } catch (SQLException ex){
-           Logger.getLogger(Regulamin.class.getName()).log(Level.SEVERE,null,ex);
+           Logger.getLogger(Biblioteka_dodajksiazke.class.getName()).log(Level.SEVERE,null,ex);
        }
         }
         
@@ -112,7 +112,7 @@ public class Biblioteka_dodajksiazke extends javax.swing.JFrame {
                }
            }
        } catch (SQLException ex){
-           Logger.getLogger(Regulamin.class.getName()).log(Level.SEVERE,null,ex);
+           Logger.getLogger(Biblioteka_dodajksiazke.class.getName()).log(Level.SEVERE,null,ex);
        }
         }
 
@@ -427,7 +427,7 @@ public class Biblioteka_dodajksiazke extends javax.swing.JFrame {
                 idkategorii = cursor.getInt(1);
            }}
          } catch (SQLException ex){
-           Logger.getLogger(Regulamin.class.getName()).log(Level.SEVERE,null,ex);
+           Logger.getLogger(Biblioteka_dodajksiazke.class.getName()).log(Level.SEVERE,null,ex);
        }
        
        try{
@@ -446,7 +446,7 @@ public class Biblioteka_dodajksiazke extends javax.swing.JFrame {
                idautora = cursor.getInt(1);
            }}
          } catch (SQLException ex){
-           Logger.getLogger(Regulamin.class.getName()).log(Level.SEVERE,null,ex);
+           Logger.getLogger(Biblioteka_dodajksiazke.class.getName()).log(Level.SEVERE,null,ex);
        }
        
        try{
@@ -463,7 +463,7 @@ public class Biblioteka_dodajksiazke extends javax.swing.JFrame {
                idwydawnictwa = cursor.getInt(1);
            }}
          } catch (SQLException ex){
-           Logger.getLogger(Regulamin.class.getName()).log(Level.SEVERE,null,ex);
+           Logger.getLogger(Biblioteka_dodajksiazke.class.getName()).log(Level.SEVERE,null,ex);
        }
     
        try{
@@ -503,7 +503,7 @@ public class Biblioteka_dodajksiazke extends javax.swing.JFrame {
             
          }
        }catch (SQLException ex){
-           Logger.getLogger(Regulamin.class.getName()).log(Level.SEVERE,null,ex);
+           Logger.getLogger(Biblioteka_dodajksiazke.class.getName()).log(Level.SEVERE,null,ex);
        }
     }//GEN-LAST:event_jButton3ActionPerformed
 

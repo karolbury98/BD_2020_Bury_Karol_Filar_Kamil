@@ -368,7 +368,7 @@ Connection conn = null;
                }
            }
        } catch (SQLException ex){
-           Logger.getLogger(Regulamin.class.getName()).log(Level.SEVERE,null,ex);
+           Logger.getLogger(Wypozyczenia_administrator.class.getName()).log(Level.SEVERE,null,ex);
        }
     }//GEN-LAST:event_formWindowOpened
 
@@ -405,7 +405,7 @@ Connection conn = null;
          cs.execute();
            }
                 } catch (SQLException ex){
-           Logger.getLogger(Regulamin.class.getName()).log(Level.SEVERE,null,ex);
+           Logger.getLogger(Wypozyczenia_administrator.class.getName()).log(Level.SEVERE,null,ex);
        }
         
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -425,7 +425,7 @@ Connection conn = null;
                 cs.execute();
                 }
                 } catch (SQLException ex){
-           Logger.getLogger(Regulamin.class.getName()).log(Level.SEVERE,null,ex);
+           Logger.getLogger(Wypozyczenia_administrator.class.getName()).log(Level.SEVERE,null,ex);
        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
