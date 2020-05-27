@@ -40,6 +40,11 @@ public class Biblioteka_main extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton1.setText("Baza książek");
@@ -203,9 +208,22 @@ public class Biblioteka_main extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        new Panel_administratora().setVisible(true);
+          
+            new Panel_administratora().setVisible(true);
        super.dispose();
+        
+        
     }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+         if(User_login.getInstance().getID_Roli() == 2){
+           jButton8.setEnabled(false);
+        }
+       
+         if(User_login.getInstance().getID_Roli() == 1){
+           jButton2.setEnabled(false);
+        }
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments

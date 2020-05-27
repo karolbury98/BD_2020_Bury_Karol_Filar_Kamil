@@ -261,7 +261,11 @@ public int idkary;
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-         conn = DbAccess.ConnectDb();
+        if(User_login.getInstance().getID_Roli() == 1){
+           jButton2.setEnabled(false);
+           jButton1.setEnabled(false);
+        }
+        conn = DbAccess.ConnectDb();
        try{
            if(conn!=null){
                CallableStatement cs = null;
@@ -308,6 +312,7 @@ public int idkary;
             }
            }
         */
+        
         conn = DbAccess.ConnectDb();
          try{
            if(conn!=null){

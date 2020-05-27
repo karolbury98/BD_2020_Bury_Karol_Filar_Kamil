@@ -137,19 +137,10 @@ public class Autorzy extends javax.swing.JFrame {
         cs.registerOutParameter(1, OracleTypes.CURSOR);
         cs.execute();
         ResultSet cursor = ((OracleCallableStatement) cs).getCursor(1);
-               
-               int i=0;
-               while(cursor.next()){
+          while(cursor.next()){
                   DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
                   model.addRow(new Object[]{cursor.getString(1), cursor.getString(2), cursor.getString(3),cursor.getDate(4),cursor.getDate(5)});
-              
-                  // jTable1.getModel().setValueAt(cursor.getString(1),i,0);
-                 //  jTable1.getModel().setValueAt(cursor.getString(2),i,1);  
-                 //   jTable1.getModel().setValueAt(cursor.getString(3),i,2);
-                 //  jTable1.getModel().setValueAt(cursor.getDate(4),i,3); 
-                 //   jTable1.getModel().setValueAt(cursor.getDate(5),i,4);
-                   
-               //    i++;
+                
                }
            }
        } catch (SQLException ex){
