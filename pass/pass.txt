@@ -1,4 +1,5 @@
-W tym pliku będą hasła do kont
-
-Konto administratora: 
+﻿Konto administratora: 
 login: admin hasło: admin
+
+Konto użytkownika:
+login: student hasło: student
