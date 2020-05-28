@@ -371,7 +371,7 @@ public int idkary;
                   stmt.setDate(6, dataZwrotu);
                   int karaID = 5;
                   stmt.setInt(7, karaID);
-                  System.out.println("id kary "+idkary);
+                 
                   int naleznosc = 0; //Naleznosc na początku wynosi 0
                   stmt.setInt(8, naleznosc);
                    stmt.registerOutParameter(9, java.sql.Types.VARCHAR);
