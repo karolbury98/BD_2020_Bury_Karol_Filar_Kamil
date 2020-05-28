@@ -9,8 +9,10 @@ import java.math.BigDecimal;
 import java.sql.Array;
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Types;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,7 +28,12 @@ import oracle.jdbc.OracleTypes;
  */
 public class Moje_wypozyczenia extends javax.swing.JFrame {
     Connection conn = null;
+    Connection conn2 = null;
+    Connection conn3 = null;
+     Connection conn4 = null;
      User_login User_login = new User_login();
+     public int kwota;
+     public int roznica;
     /**
      * Creates new form Moje_wypozyczenia
      */
@@ -130,10 +137,30 @@ public class Moje_wypozyczenia extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         conn = DbAccess.ConnectDb();
+        conn2 = DbAccess.ConnectDb();
+        conn4 = DbAccess.ConnectDb();
        try{
            if(conn!=null){
         CallableStatement cs = null;
+        CallableStatement cs2 = null;
+        cs2 = conn.prepareCall("call SHOW_WYPOZYCZENIA2(?,?)");
+         cs2.setInt(1,User_login.getInstance().getID_Klienta());
+        cs2.registerOutParameter(2, OracleTypes.CURSOR);
+        cs2.execute();
+         ResultSet cursor2 = ((OracleCallableStatement) cs2).getCursor(2);
+               
+               while(cursor2.next()){
+              int idwypozyczenia = cursor2.getInt(1);
+              CallableStatement cs3 = null;
+              cs3 = conn.prepareCall("{ ? = call update_naleznosc3(?)}");
+              cs3.registerOutParameter(1,Types.VARCHAR);
+              cs3.setInt(2,idwypozyczenia);
+              cs3.executeUpdate();
+                   System.out.println(idwypozyczenia+": "+cs3.getString(1));
+              
+               }
         cs = conn.prepareCall("call SHOW_WYPOZYCZENIA(?,?)");
+      //  update_naleznosc3
         cs.setInt(1,User_login.getInstance().getID_Klienta());
         cs.registerOutParameter(2, OracleTypes.CURSOR);
         cs.execute();
@@ -148,39 +175,22 @@ public class Moje_wypozyczenia extends javax.swing.JFrame {
        } catch (SQLException ex){
            Logger.getLogger(Moje_wypozyczenia.class.getName()).log(Level.SEVERE,null,ex);
        }
-       
         try{
-         CallableStatement callableStmt = conn.prepareCall("{ ? = call date_diff(?)}");
-        callableStmt.registerOutParameter(1,Types.ARRAY,"ROZNICA_DNI");
-        callableStmt.setInt(2,User_login.getInstance().getID_Klienta());
-        callableStmt.execute();
-        Array z = callableStmt.getArray (1);
-        BigDecimal[] zips = (BigDecimal[]) z.getArray();
-        for (int i = 0; i < zips.length; i++) {
             
-            if(zips[i].intValueExact() <= 0 ) {
-
-          zips[i] = BigDecimal.valueOf(0);
-            }
-            System.out.println(zips[i]);
-        }
-       }catch (SQLException ex){
-           Logger.getLogger(Wypozyczenia_administrator.class.getName()).log(Level.SEVERE,null,ex);
-       }
-        
-        try{
-            if(conn!=null){
+            if(conn2!=null){
         CallableStatement cs2 = null;
         cs2 = conn.prepareCall("{ ? = call naleznosc()}");
         cs2.registerOutParameter(1, Types.NUMERIC);
         cs2.execute();
-        int kwota = cs2.getInt(1);
+         kwota = cs2.getInt(1);
         
                 
             }
         }catch (SQLException ex){
            Logger.getLogger(Moje_wypozyczenia.class.getName()).log(Level.SEVERE,null,ex);
        }
+        
+        
     }//GEN-LAST:event_formWindowOpened
 
     private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
