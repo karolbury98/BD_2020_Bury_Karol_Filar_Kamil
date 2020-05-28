@@ -160,7 +160,7 @@ public class Moje_wypozyczenia extends javax.swing.JFrame {
               
                }
         cs = conn.prepareCall("call SHOW_WYPOZYCZENIA(?,?)");
-      //  update_naleznosc3
+      
         cs.setInt(1,User_login.getInstance().getID_Klienta());
         cs.registerOutParameter(2, OracleTypes.CURSOR);
         cs.execute();
@@ -175,21 +175,7 @@ public class Moje_wypozyczenia extends javax.swing.JFrame {
        } catch (SQLException ex){
            Logger.getLogger(Moje_wypozyczenia.class.getName()).log(Level.SEVERE,null,ex);
        }
-        try{
-            
-            if(conn2!=null){
-        CallableStatement cs2 = null;
-        cs2 = conn.prepareCall("{ ? = call naleznosc()}");
-        cs2.registerOutParameter(1, Types.NUMERIC);
-        cs2.execute();
-         kwota = cs2.getInt(1);
-        
-                
-            }
-        }catch (SQLException ex){
-           Logger.getLogger(Moje_wypozyczenia.class.getName()).log(Level.SEVERE,null,ex);
-       }
-        
+       
         
     }//GEN-LAST:event_formWindowOpened
 
