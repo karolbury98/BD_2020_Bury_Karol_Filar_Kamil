@@ -172,14 +172,14 @@ public class Panel_rejestracyjny3 extends javax.swing.JFrame {
                int nextID_from_seq;
             nextID_from_seq = rs.getInt(1);
                int idklienta = nextID_from_seq;
-               System.out.println("idklienta: "+idklienta);
+              //// System.out.println("idklienta: "+idklienta);
                
                while(rs2.next()){
                    while(rs3.next()){
                    int idadresu = rs2.getInt(1);
-                   System.out.println("ID ADRESU: "+rs2.getInt(1));
+                  // System.out.println("ID ADRESU: "+rs2.getInt(1));
                    int idkonta = rs3.getInt(1);
-                       System.out.println("ID KONTA: "+rs3.getInt(1));
+                    //   System.out.println("ID KONTA: "+rs3.getInt(1));
             
                 System.out.println(nextID_from_seq);
                   stmt = conn.prepareCall("{call ADD_USER(?,?,?,?,?,?,?)}");

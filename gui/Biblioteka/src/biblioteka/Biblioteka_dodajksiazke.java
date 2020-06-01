@@ -497,13 +497,7 @@ public class Biblioteka_dodajksiazke extends javax.swing.JFrame {
             String result = stmt.getString(8);
             System.out.println("Dodano książkę: "+result);
             
-            // To do sprawdzenia czy będzie działać
-            if(result == stmt.getString(8)){
-                jLabel12.setText("Dodano książkę!");
-            }
-            else{
-                jLabel12.setText("Jeszcze nie dodano książki!");
-            }
+          
            
             
          }

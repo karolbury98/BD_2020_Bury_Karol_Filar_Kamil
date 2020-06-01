@@ -149,7 +149,7 @@ public class Panel_rejestracyjny extends javax.swing.JFrame {
            while(rs.next()){
             int nextID_from_seq;
             nextID_from_seq = rs.getInt(1);
-                System.out.println(nextID_from_seq);
+               // System.out.println(nextID_from_seq);
                   stmt = conn.prepareCall("{call ADD_KONTO(?,?,?,?,?)}");
            
           int idkonta = nextID_from_seq;

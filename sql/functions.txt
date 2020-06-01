@@ -1,0 +1,29 @@
+create or replace NONEDITIONABLE function diffdate (date1 in date, date2 in date)
+return number is 
+begin
+  return date2-date1;
+
+end;
+
+
+create or replace NONEDITIONABLE function date_diff2(J_ID IN INTEGER) 
+  return number is 
+  data_z_tabeli date;
+begin
+    Select DATA_ZWROTU into data_z_tabeli from WYPOZYCZENIA where ID_WYPOZYCZENIA = J_ID ORDER BY DATA_ZWROTU;
+    return diffdate(data_z_tabeli, sysdate);   
+end;
+
+
+create or replace NONEDITIONABLE function update_naleznosc3(J_ID IN INTEGER) RETURN VARCHAR AS
+  oplata number;
+  roznica number;
+begin
+    roznica := date_diff2(J_ID);
+    SELECT KWOTA_WYNAGRADZAJACA into oplata FROM KARY WHERE ID_KARY = 3;
+    IF roznica>0 THEN
+    UPDATE KARY_WYPOZYCZENIA SET NALEZNOSC = roznica*oplata WHERE ID_WYPOZYCZENIA = J_ID;
+     return 'Dodano';
+    END IF;
+    return 'Nie zmieniono';
+end;
