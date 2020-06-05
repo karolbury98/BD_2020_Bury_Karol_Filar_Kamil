@@ -1,5 +1,5 @@
 --------------------------------------------------------
---  File created - czwartek-maja-28-2020   
+--  File created - pi¹tek-czerwca-05-2020   
 --------------------------------------------------------
 --------------------------------------------------------
 --  DDL for Type ROZNICA_DNI
@@ -31,7 +31,7 @@
 --  DDL for Sequence IDAUTORA
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "STUDENT"."IDAUTORA"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 26 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
+   CREATE SEQUENCE  "STUDENT"."IDAUTORA"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 86 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
 --------------------------------------------------------
 --  DDL for Sequence IDKARY
 --------------------------------------------------------
@@ -41,7 +41,7 @@
 --  DDL for Sequence IDKATEGORIA
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "STUDENT"."IDKATEGORIA"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 5 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
+   CREATE SEQUENCE  "STUDENT"."IDKATEGORIA"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 65 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
 --------------------------------------------------------
 --  DDL for Sequence IDKKLIENTA
 --------------------------------------------------------
@@ -56,7 +56,7 @@
 --  DDL for Sequence IDKSIAZKI
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "STUDENT"."IDKSIAZKI"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 11 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
+   CREATE SEQUENCE  "STUDENT"."IDKSIAZKI"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 51 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
 --------------------------------------------------------
 --  DDL for Sequence IDWYDAWNICTWA
 --------------------------------------------------------
@@ -66,7 +66,7 @@
 --  DDL for Sequence IDWYPOZYCZENIA
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "STUDENT"."IDWYPOZYCZENIA"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 5 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
+   CREATE SEQUENCE  "STUDENT"."IDWYPOZYCZENIA"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 45 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
 --------------------------------------------------------
 --  DDL for Table ADRESY
 --------------------------------------------------------
@@ -290,11 +290,13 @@ Insert into STUDENT.ADRESY (ID_ADRESU,MIEJSCOWOSC,ULICA,NUMER_DOMU,NUMER_LOKALU,
 REM INSERTING into STUDENT.AUTORZY
 SET DEFINE OFF;
 Insert into STUDENT.AUTORZY (ID_AUTORA,IMIE,NAZWISKO,NARODOWOSC,DATA_URODZENIA,DATA_SMIERCI) values ('6','Stephen','King','USA',to_date('47/09/21','RR/MM/DD'),null);
+Insert into STUDENT.AUTORZY (ID_AUTORA,IMIE,NAZWISKO,NARODOWOSC,DATA_URODZENIA,DATA_SMIERCI) values ('66','Jan','Kowalski','Polska',to_date('20/03/03','RR/MM/DD'),to_date('60/04/04','RR/MM/DD'));
 Insert into STUDENT.AUTORZY (ID_AUTORA,IMIE,NAZWISKO,NARODOWOSC,DATA_URODZENIA,DATA_SMIERCI) values ('1','Henryk','Sienkiewicz','Polska',to_date('46/05/05','RR/MM/DD'),to_date('16/11/15','RR/MM/DD'));
 Insert into STUDENT.AUTORZY (ID_AUTORA,IMIE,NAZWISKO,NARODOWOSC,DATA_URODZENIA,DATA_SMIERCI) values ('2','Adam','Mickiewicz','Polska',to_date('58/12/24','RR/MM/DD'),to_date('55/11/26','RR/MM/DD'));
 Insert into STUDENT.AUTORZY (ID_AUTORA,IMIE,NAZWISKO,NARODOWOSC,DATA_URODZENIA,DATA_SMIERCI) values ('3','J. R. R.','Tolkien','Wielka Brytania',to_date('92/01/03','RR/MM/DD'),to_date('73/09/02','RR/MM/DD'));
 Insert into STUDENT.AUTORZY (ID_AUTORA,IMIE,NAZWISKO,NARODOWOSC,DATA_URODZENIA,DATA_SMIERCI) values ('24','Astrid','Lindgren','Szwecja',to_date('07/11/14','RR/MM/DD'),to_date('02/01/28','RR/MM/DD'));
 Insert into STUDENT.AUTORZY (ID_AUTORA,IMIE,NAZWISKO,NARODOWOSC,DATA_URODZENIA,DATA_SMIERCI) values ('25','Jan','Kochanowski','Polska',to_date('30/05/22','RR/MM/DD'),to_date('84/08/22','RR/MM/DD'));
+Insert into STUDENT.AUTORZY (ID_AUTORA,IMIE,NAZWISKO,NARODOWOSC,DATA_URODZENIA,DATA_SMIERCI) values ('46','Juliusz','Slowacki','Polska',to_date('09/09/04','RR/MM/DD'),to_date('49/04/03','RR/MM/DD'));
 Insert into STUDENT.AUTORZY (ID_AUTORA,IMIE,NAZWISKO,NARODOWOSC,DATA_URODZENIA,DATA_SMIERCI) values ('5','Ernest','Hemingway','USA',to_date('99/07/21','RR/MM/DD'),to_date('61/07/02','RR/MM/DD'));
 REM INSERTING into STUDENT.AUTORZY_KSIAZKI
 SET DEFINE OFF;
@@ -304,6 +306,8 @@ Insert into STUDENT.AUTORZY_KSIAZKI (ID_KSIAZKI,ID_AUTORA) values ('7','6');
 Insert into STUDENT.AUTORZY_KSIAZKI (ID_KSIAZKI,ID_AUTORA) values ('8','1');
 Insert into STUDENT.AUTORZY_KSIAZKI (ID_KSIAZKI,ID_AUTORA) values ('9','1');
 Insert into STUDENT.AUTORZY_KSIAZKI (ID_KSIAZKI,ID_AUTORA) values ('10','1');
+Insert into STUDENT.AUTORZY_KSIAZKI (ID_KSIAZKI,ID_AUTORA) values ('32','1');
+Insert into STUDENT.AUTORZY_KSIAZKI (ID_KSIAZKI,ID_AUTORA) values ('31','46');
 Insert into STUDENT.AUTORZY_KSIAZKI (ID_KSIAZKI,ID_AUTORA) values ('1','1');
 Insert into STUDENT.AUTORZY_KSIAZKI (ID_KSIAZKI,ID_AUTORA) values ('3','2');
 Insert into STUDENT.AUTORZY_KSIAZKI (ID_KSIAZKI,ID_AUTORA) values ('2','3');
@@ -317,28 +321,37 @@ Insert into STUDENT.KARY (ID_KARY,TYP_KARY,KWOTA_WYNAGRADZAJACA) values ('2','Zg
 Insert into STUDENT.KARY (ID_KARY,TYP_KARY,KWOTA_WYNAGRADZAJACA) values ('3','Dzien opoznienia','5');
 REM INSERTING into STUDENT.KARY_WYPOZYCZENIA
 SET DEFINE OFF;
-Insert into STUDENT.KARY_WYPOZYCZENIA (ID_KARY,ID_WYPOZYCZENIA,NALEZNOSC) values ('3','4','10');
+Insert into STUDENT.KARY_WYPOZYCZENIA (ID_KARY,ID_WYPOZYCZENIA,NALEZNOSC) values ('3','4','19');
+Insert into STUDENT.KARY_WYPOZYCZENIA (ID_KARY,ID_WYPOZYCZENIA,NALEZNOSC) values ('5','6','0');
+Insert into STUDENT.KARY_WYPOZYCZENIA (ID_KARY,ID_WYPOZYCZENIA,NALEZNOSC) values ('5','25','0');
+Insert into STUDENT.KARY_WYPOZYCZENIA (ID_KARY,ID_WYPOZYCZENIA,NALEZNOSC) values ('5','5','0');
 Insert into STUDENT.KARY_WYPOZYCZENIA (ID_KARY,ID_WYPOZYCZENIA,NALEZNOSC) values ('3','1','0');
 Insert into STUDENT.KARY_WYPOZYCZENIA (ID_KARY,ID_WYPOZYCZENIA,NALEZNOSC) values ('3','3','0');
-Insert into STUDENT.KARY_WYPOZYCZENIA (ID_KARY,ID_WYPOZYCZENIA,NALEZNOSC) values ('3','2','0');
+Insert into STUDENT.KARY_WYPOZYCZENIA (ID_KARY,ID_WYPOZYCZENIA,NALEZNOSC) values ('3','2','5');
+Insert into STUDENT.KARY_WYPOZYCZENIA (ID_KARY,ID_WYPOZYCZENIA,NALEZNOSC) values ('5','26','0');
 REM INSERTING into STUDENT.KATEGORIE
 SET DEFINE OFF;
+Insert into STUDENT.KATEGORIE (ID_KATEGORII,NAZWA) values ('26','Sensacyjne');
 Insert into STUDENT.KATEGORIE (ID_KATEGORII,NAZWA) values ('1','Przygodowa');
 Insert into STUDENT.KATEGORIE (ID_KATEGORII,NAZWA) values ('2','Historyczna');
 Insert into STUDENT.KATEGORIE (ID_KATEGORII,NAZWA) values ('3','Fantasy');
+Insert into STUDENT.KATEGORIE (ID_KATEGORII,NAZWA) values ('25','Dramat');
+Insert into STUDENT.KATEGORIE (ID_KATEGORII,NAZWA) values ('45','Thriller');
 Insert into STUDENT.KATEGORIE (ID_KATEGORII,NAZWA) values ('4','Horror');
 REM INSERTING into STUDENT.KLIENCI
 SET DEFINE OFF;
-Insert into STUDENT.KLIENCI (ID_KLIENTA,ID_ADRESU,ID_KONTA,IMIE,NAZWISKO,NUMER_TELEFONU) values ('1','1','2','Jan','Kowalski','789456123');
-Insert into STUDENT.KLIENCI (ID_KLIENTA,ID_ADRESU,ID_KONTA,IMIE,NAZWISKO,NUMER_TELEFONU) values ('2','3','4','Jacek','Nowak','987654321');
+Insert into STUDENT.KLIENCI (ID_KLIENTA,ID_ADRESU,ID_KONTA,IMIE,NAZWISKO,NUMER_TELEFONU) values ('1','1','2','Jacek','Kowalski','789456123');
+Insert into STUDENT.KLIENCI (ID_KLIENTA,ID_ADRESU,ID_KONTA,IMIE,NAZWISKO,NUMER_TELEFONU) values ('2','3','4','Jacek','Nowacki','987654321');
 REM INSERTING into STUDENT.KSIAZKI
 SET DEFINE OFF;
-Insert into STUDENT.KSIAZKI (ID_KSIAZKI,ID_KATEGORII,ID_WYDAWNICTWA,TYTUL,DATA_WYDANIA,ILOSC_EGZEMPLARZY) values ('5','4','1','Instytut',to_date('19/09/10','RR/MM/DD'),'5');
-Insert into STUDENT.KSIAZKI (ID_KSIAZKI,ID_KATEGORII,ID_WYDAWNICTWA,TYTUL,DATA_WYDANIA,ILOSC_EGZEMPLARZY) values ('6','4','2','Lsnienie',to_date('20/05/23','RR/MM/DD'),'11');
+Insert into STUDENT.KSIAZKI (ID_KSIAZKI,ID_KATEGORII,ID_WYDAWNICTWA,TYTUL,DATA_WYDANIA,ILOSC_EGZEMPLARZY) values ('5','4','1','Instytut',to_date('19/09/10','RR/MM/DD'),'3');
+Insert into STUDENT.KSIAZKI (ID_KSIAZKI,ID_KATEGORII,ID_WYDAWNICTWA,TYTUL,DATA_WYDANIA,ILOSC_EGZEMPLARZY) values ('6','4','2','Lsnienie',to_date('20/05/23','RR/MM/DD'),'10');
 Insert into STUDENT.KSIAZKI (ID_KSIAZKI,ID_KATEGORII,ID_WYDAWNICTWA,TYTUL,DATA_WYDANIA,ILOSC_EGZEMPLARZY) values ('7','4','3','To',to_date('20/05/07','RR/MM/DD'),'6');
-Insert into STUDENT.KSIAZKI (ID_KSIAZKI,ID_KATEGORII,ID_WYDAWNICTWA,TYTUL,DATA_WYDANIA,ILOSC_EGZEMPLARZY) values ('8','2','1','Krzyzacy',to_date('20/05/15','RR/MM/DD'),'10');
-Insert into STUDENT.KSIAZKI (ID_KSIAZKI,ID_KATEGORII,ID_WYDAWNICTWA,TYTUL,DATA_WYDANIA,ILOSC_EGZEMPLARZY) values ('9','2','3','Quo vadis',to_date('20/05/28','RR/MM/DD'),'5');
+Insert into STUDENT.KSIAZKI (ID_KSIAZKI,ID_KATEGORII,ID_WYDAWNICTWA,TYTUL,DATA_WYDANIA,ILOSC_EGZEMPLARZY) values ('8','2','1','Krzyzacy',to_date('20/05/15','RR/MM/DD'),'8');
+Insert into STUDENT.KSIAZKI (ID_KSIAZKI,ID_KATEGORII,ID_WYDAWNICTWA,TYTUL,DATA_WYDANIA,ILOSC_EGZEMPLARZY) values ('9','2','3','Quo vadis',to_date('20/05/28','RR/MM/DD'),'3');
 Insert into STUDENT.KSIAZKI (ID_KSIAZKI,ID_KATEGORII,ID_WYDAWNICTWA,TYTUL,DATA_WYDANIA,ILOSC_EGZEMPLARZY) values ('10','1','2','Latarnik',to_date('46/05/24','RR/MM/DD'),'15');
+Insert into STUDENT.KSIAZKI (ID_KSIAZKI,ID_KATEGORII,ID_WYDAWNICTWA,TYTUL,DATA_WYDANIA,ILOSC_EGZEMPLARZY) values ('32','1','3','W pustyni i w puszczy',to_date('05/03/03','RR/MM/DD'),'6');
+Insert into STUDENT.KSIAZKI (ID_KSIAZKI,ID_KATEGORII,ID_WYDAWNICTWA,TYTUL,DATA_WYDANIA,ILOSC_EGZEMPLARZY) values ('31','25','1','Balladyna',to_date('05/03/03','RR/MM/DD'),'6');
 Insert into STUDENT.KSIAZKI (ID_KSIAZKI,ID_KATEGORII,ID_WYDAWNICTWA,TYTUL,DATA_WYDANIA,ILOSC_EGZEMPLARZY) values ('1','2','1','Ogniem i mieczem',to_date('20/05/19','RR/MM/DD'),'14');
 Insert into STUDENT.KSIAZKI (ID_KSIAZKI,ID_KATEGORII,ID_WYDAWNICTWA,TYTUL,DATA_WYDANIA,ILOSC_EGZEMPLARZY) values ('2','3','2','Pustkowie Smauga',to_date('20/02/12','RR/MM/DD'),'19');
 Insert into STUDENT.KSIAZKI (ID_KSIAZKI,ID_KATEGORII,ID_WYDAWNICTWA,TYTUL,DATA_WYDANIA,ILOSC_EGZEMPLARZY) values ('3','1','3','Pan Tadeusz',to_date('20/05/08','RR/MM/DD'),'3');
@@ -364,16 +377,309 @@ Insert into STUDENT.WYDAWNICTWA (ID_WYDAWNICTWA,NAZWA,MIEJSCOWOSC,ULICA,NUMER_BU
 Insert into STUDENT.WYDAWNICTWA (ID_WYDAWNICTWA,NAZWA,MIEJSCOWOSC,ULICA,NUMER_BUDYNKU) values ('4','Operon','Warszawa','Czarna','23');
 REM INSERTING into STUDENT.WYPOZYCZENIA
 SET DEFINE OFF;
+Insert into STUDENT.WYPOZYCZENIA (ID_WYPOZYCZENIA,ID_KSIAZKI,ID_PRACOWNIKA,ID_KLIENTA,DATA_WYPOZYCZENIA,DATA_ZWROTU) values ('25','8','1','2',to_date('20/05/30','RR/MM/DD'),to_date('20/06/12','RR/MM/DD'));
 Insert into STUDENT.WYPOZYCZENIA (ID_WYPOZYCZENIA,ID_KSIAZKI,ID_PRACOWNIKA,ID_KLIENTA,DATA_WYPOZYCZENIA,DATA_ZWROTU) values ('4','4','1','1',to_date('20/05/20','RR/MM/DD'),to_date('20/05/26','RR/MM/DD'));
+Insert into STUDENT.WYPOZYCZENIA (ID_WYPOZYCZENIA,ID_KSIAZKI,ID_PRACOWNIKA,ID_KLIENTA,DATA_WYPOZYCZENIA,DATA_ZWROTU) values ('6','6','1','2',to_date('20/05/30','RR/MM/DD'),to_date('20/06/08','RR/MM/DD'));
+Insert into STUDENT.WYPOZYCZENIA (ID_WYPOZYCZENIA,ID_KSIAZKI,ID_PRACOWNIKA,ID_KLIENTA,DATA_WYPOZYCZENIA,DATA_ZWROTU) values ('5','5','1','1',to_date('20/05/30','RR/MM/DD'),to_date('20/06/13','RR/MM/DD'));
 Insert into STUDENT.WYPOZYCZENIA (ID_WYPOZYCZENIA,ID_KSIAZKI,ID_PRACOWNIKA,ID_KLIENTA,DATA_WYPOZYCZENIA,DATA_ZWROTU) values ('1','1','1','1',to_date('20/05/25','RR/MM/DD'),to_date('20/06/02','RR/MM/DD'));
 Insert into STUDENT.WYPOZYCZENIA (ID_WYPOZYCZENIA,ID_KSIAZKI,ID_PRACOWNIKA,ID_KLIENTA,DATA_WYPOZYCZENIA,DATA_ZWROTU) values ('2','2','1','1',to_date('20/05/26','RR/MM/DD'),to_date('20/06/04','RR/MM/DD'));
 Insert into STUDENT.WYPOZYCZENIA (ID_WYPOZYCZENIA,ID_KSIAZKI,ID_PRACOWNIKA,ID_KLIENTA,DATA_WYPOZYCZENIA,DATA_ZWROTU) values ('3','3','1','1',to_date('20/05/20','RR/MM/DD'),to_date('20/05/31','RR/MM/DD'));
+Insert into STUDENT.WYPOZYCZENIA (ID_WYPOZYCZENIA,ID_KSIAZKI,ID_PRACOWNIKA,ID_KLIENTA,DATA_WYPOZYCZENIA,DATA_ZWROTU) values ('26','8','1','2',to_date('20/05/30','RR/MM/DD'),to_date('20/06/11','RR/MM/DD'));
 --------------------------------------------------------
---  DDL for Procedure ADD_ADRES
+--  DDL for Trigger ADRES_INITCAP
+--------------------------------------------------------
+
+  CREATE OR REPLACE NONEDITIONABLE TRIGGER "STUDENT"."ADRES_INITCAP" 
+BEFORE INSERT ON ADRESY
+FOR EACH ROW 
+BEGIN
+    :NEW.MIEJSCOWOSC:=INITCAP(:NEW.MIEJSCOWOSC);
+    :NEW.ULICA:=INITCAP(:NEW.ULICA);
+END;
+/
+ALTER TRIGGER "STUDENT"."ADRES_INITCAP" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger AUTOR_INITCAP
+--------------------------------------------------------
+
+  CREATE OR REPLACE NONEDITIONABLE TRIGGER "STUDENT"."AUTOR_INITCAP" 
+BEFORE INSERT ON AUTORZY
+FOR EACH ROW 
+BEGIN
+    :NEW.IMIE:=INITCAP(:NEW.IMIE);
+    :NEW.NAZWISKO:=INITCAP(:NEW.NAZWISKO);
+    :NEW.NARODOWOSC:=INITCAP(:NEW.NARODOWOSC);
+END;
+
+/
+ALTER TRIGGER "STUDENT"."AUTOR_INITCAP" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger KARA_INITCAP
+--------------------------------------------------------
+
+  CREATE OR REPLACE NONEDITIONABLE TRIGGER "STUDENT"."KARA_INITCAP" 
+BEFORE INSERT ON KARY
+FOR EACH ROW 
+BEGIN
+    :NEW.TYP_KARY:=INITCAP(:NEW.TYP_KARY);
+END;
+
+/
+ALTER TRIGGER "STUDENT"."KARA_INITCAP" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger KATEGORIA_INITCAP
+--------------------------------------------------------
+
+  CREATE OR REPLACE NONEDITIONABLE TRIGGER "STUDENT"."KATEGORIA_INITCAP" 
+BEFORE INSERT ON KATEGORIE
+FOR EACH ROW 
+BEGIN
+    :NEW.NAZWA:=INITCAP(:NEW.NAZWA);
+END;
+
+/
+ALTER TRIGGER "STUDENT"."KATEGORIA_INITCAP" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger KLIENT_INITCAP
+--------------------------------------------------------
+
+  CREATE OR REPLACE NONEDITIONABLE TRIGGER "STUDENT"."KLIENT_INITCAP" 
+BEFORE INSERT ON KLIENCI
+FOR EACH ROW 
+BEGIN
+    :NEW.IMIE:=INITCAP(:NEW.IMIE);
+    :NEW.NAZWISKO:=INITCAP(:NEW.NAZWISKO);
+END;
+/
+ALTER TRIGGER "STUDENT"."KLIENT_INITCAP" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger KSIAZKA_INITCAP
+--------------------------------------------------------
+
+  CREATE OR REPLACE NONEDITIONABLE TRIGGER "STUDENT"."KSIAZKA_INITCAP" 
+BEFORE INSERT ON KSIAZKI
+FOR EACH ROW 
+BEGIN
+    :NEW.TYTUL:=INITCAP(:NEW.TYTUL);
+END;
+
+/
+ALTER TRIGGER "STUDENT"."KSIAZKA_INITCAP" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger PRACOWNIK_INITCAP
+--------------------------------------------------------
+
+  CREATE OR REPLACE NONEDITIONABLE TRIGGER "STUDENT"."PRACOWNIK_INITCAP" 
+BEFORE INSERT ON PRACOWNICY
+FOR EACH ROW 
+BEGIN
+    :NEW.IMIE:=INITCAP(:NEW.IMIE);
+    :NEW.NAZWISKO:=INITCAP(:NEW.NAZWISKO);
+END;
+
+/
+ALTER TRIGGER "STUDENT"."PRACOWNIK_INITCAP" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger TRIG_NALEZNOSC
+--------------------------------------------------------
+
+  CREATE OR REPLACE NONEDITIONABLE TRIGGER "STUDENT"."TRIG_NALEZNOSC" 
+before update on kary_wypozyczenia
+for each row
+begin
+ if :new.naleznosc < 5 then
+ :new.naleznosc:= 5;
+ end if;
+end;
+/
+ALTER TRIGGER "STUDENT"."TRIG_NALEZNOSC" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger UPDATE_KLIENT_INITCAP
+--------------------------------------------------------
+
+  CREATE OR REPLACE NONEDITIONABLE TRIGGER "STUDENT"."UPDATE_KLIENT_INITCAP" 
+BEFORE UPDATE ON KLIENCI
+FOR EACH ROW 
+BEGIN
+    :NEW.IMIE:=INITCAP(:NEW.IMIE);
+    :NEW.NAZWISKO:=INITCAP(:NEW.NAZWISKO);
+END;
+
+/
+ALTER TRIGGER "STUDENT"."UPDATE_KLIENT_INITCAP" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger WYDAWNICTWO_INITCAP
+--------------------------------------------------------
+
+  CREATE OR REPLACE NONEDITIONABLE TRIGGER "STUDENT"."WYDAWNICTWO_INITCAP" 
+BEFORE INSERT ON WYDAWNICTWA
+FOR EACH ROW 
+BEGIN
+    :NEW.NAZWA:=INITCAP(:NEW.NAZWA);
+    :NEW.MIEJSCOWOSC:=INITCAP(:NEW.MIEJSCOWOSC);
+    :NEW.ULICA:=INITCAP(:NEW.ULICA);
+END;
+
+/
+ALTER TRIGGER "STUDENT"."WYDAWNICTWO_INITCAP" ENABLE;
+--------------------------------------------------------
+--  DDL for Procedure DELETEWYP
 --------------------------------------------------------
 set define off;
 
-  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "STUDENT"."ADD_ADRES" 
+  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "STUDENT"."DELETEWYP" (j_idwyp IN INT)
+IS
+BEGIN
+  DELETE KARY_WYPOZYCZENIA where ID_WYPOZYCZENIA = j_idwyp;
+  COMMIT;
+   DELETE WYPOZYCZENIA where ID_WYPOZYCZENIA = j_idwyp;
+  COMMIT;
+END;
+
+/
+--------------------------------------------------------
+--  DDL for Procedure LOGIN
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "STUDENT"."LOGIN" 
+(j_login IN LOGOWANIE.LOGIN%TYPE,j_haslo IN LOGOWANIE.HASLO%TYPE,data OUT SYS_REFCURSOR)
+AS
+BEGIN
+    OPEN data FOR
+        Select ID_KONTA ,
+ID_ROLI ,
+LOGIN ,
+HASLO 
+        from LOGOWANIE
+        Where LOGIN=j_login AND HASLO=j_haslo;
+END;
+
+/
+--------------------------------------------------------
+--  DDL for Package PAKIETADD
+--------------------------------------------------------
+
+  CREATE OR REPLACE NONEDITIONABLE PACKAGE "STUDENT"."PAKIETADD" 
+IS
+PROCEDURE ADD_ADRES(v_idadresu IN ADRESY.ID_ADRESU%TYPE,
+v_miejscowosc IN ADRESY.MIEJSCOWOSC%TYPE,
+v_ulica IN ADRESY.ULICA%TYPE,
+v_nrdomu IN ADRESY.NUMER_DOMU%TYPE,
+v_nrlokalu IN ADRESY.NUMER_LOKALU%TYPE,
+v_kodpocztowy IN ADRESY.KOD_POCZTOWY%TYPE,
+out_result OUT VARCHAR2);
+PROCEDURE ADD_AUTOR(v_idautora IN AUTORZY.ID_AUTORA%TYPE,
+v_imie IN AUTORZY.IMIE%TYPE,
+v_nazwisko IN AUTORZY.NAZWISKO%TYPE,
+v_narodowosc IN AUTORZY.NARODOWOSC%TYPE,
+v_data_urodzenia IN AUTORZY.DATA_URODZENIA%TYPE,
+v_data_smierci IN AUTORZY.DATA_SMIERCI%TYPE,
+out_result OUT VARCHAR2);
+PROCEDURE ADD_KATEGORIA(v_idkategorii IN KATEGORIE.ID_KATEGORII%TYPE,
+v_nazwa IN KATEGORIE.NAZWA%TYPE,
+out_result OUT VARCHAR2);
+PROCEDURE ADD_KONTO(v_idkonta IN LOGOWANIE.ID_KONTA%TYPE,
+v_idroli IN LOGOWANIE.ID_ROLI%TYPE,
+v_login IN LOGOWANIE.LOGIN%TYPE,
+v_haslo IN LOGOWANIE.HASLO%TYPE,
+out_result OUT VARCHAR2);
+PROCEDURE ADD_KSIAZKA(v_idksiazki IN KSIAZKI.ID_KSIAZKI%TYPE,
+v_idkategorii IN KSIAZKI.ID_KATEGORII%TYPE,
+v_idwydawnictwa IN KSIAZKI.ID_WYDAWNICTWA%TYPE,
+v_tytul IN KSIAZKI.TYTUL%TYPE,
+v_data_wydania IN KSIAZKI.DATA_WYDANIA%TYPE,
+v_ilosc_egzemplarzy IN KSIAZKI.ILOSC_EGZEMPLARZY%TYPE,
+v_idautora IN AUTORZY.ID_AUTORA%TYPE,
+out_result OUT VARCHAR2);
+PROCEDURE ADD_USER(v_idklienta IN KLIENCI.ID_KLIENTA%TYPE,
+v_idadresu IN KLIENCI.ID_ADRESU%TYPE,
+v_idkonta IN KLIENCI.ID_KONTA%TYPE,
+v_imie IN KLIENCI.IMIE%TYPE,
+v_nazwisko IN KLIENCI.NAZWISKO%TYPE,
+v_telefon IN KLIENCI.NUMER_TELEFONU%TYPE,
+out_result OUT VARCHAR2);
+PROCEDURE ADD_WYDAWNICTWO(v_idwydawnictwa IN WYDAWNICTWA.ID_WYDAWNICTWA%TYPE,
+v_nazwa IN WYDAWNICTWA.NAZWA%TYPE,
+v_miejscowosc IN WYDAWNICTWA.MIEJSCOWOSC%TYPE,
+v_ulica IN WYDAWNICTWA.ULICA%TYPE,
+v_numer_budynku IN WYDAWNICTWA.NUMER_BUDYNKU%TYPE,
+out_result OUT VARCHAR2);
+PROCEDURE ADD_WYPOZYCZENIE(v_idwypozyczenia IN WYPOZYCZENIA.ID_WYPOZYCZENIA%TYPE,
+v_idksiazki IN WYPOZYCZENIA.ID_KSIAZKI%TYPE,
+v_idpracownika IN WYPOZYCZENIA.ID_PRACOWNIKA%TYPE,
+v_idklienta IN WYPOZYCZENIA.ID_KLIENTA%TYPE,
+v_data_wypozyczenia IN WYPOZYCZENIA.DATA_WYPOZYCZENIA%TYPE,
+v_data_zwrotu IN WYPOZYCZENIA.DATA_ZWROTU%TYPE,
+v_idkary IN KARY_WYPOZYCZENIA.ID_KARY%TYPE,
+v_naleznosc IN KARY_WYPOZYCZENIA.NALEZNOSC%TYPE,
+out_result OUT VARCHAR2);
+
+end;
+
+/
+--------------------------------------------------------
+--  DDL for Package PAKIETGET
+--------------------------------------------------------
+
+  CREATE OR REPLACE NONEDITIONABLE PACKAGE "STUDENT"."PAKIETGET" 
+IS
+PROCEDURE GET_ID_AUTORA(v_imie IN AUTORZY.IMIE%TYPE, v_nazwisko IN AUTORZY.NAZWISKO%TYPE, CURSOR8 OUT SYS_REFCURSOR);
+PROCEDURE GET_ID_KATEGORII(v_nazwa IN KATEGORIE.NAZWA%TYPE, CURSOR7 OUT SYS_REFCURSOR);
+PROCEDURE GET_ID_KLIENTA_LOGIN(j_idkonta IN KLIENCI.ID_KONTA%TYPE,data OUT SYS_REFCURSOR);
+PROCEDURE GET_ID_KSIAZKI_UPDATE(v_tytul IN KSIAZKI.TYTUL%TYPE, CURSOR10 OUT SYS_REFCURSOR);
+PROCEDURE GET_ID_WYDAWNICTWA(v_nazwa IN WYDAWNICTWA.NAZWA%TYPE, CURSOR9 OUT SYS_REFCURSOR);
+end;
+
+/
+--------------------------------------------------------
+--  DDL for Package PAKIETSHOW
+--------------------------------------------------------
+
+  CREATE OR REPLACE NONEDITIONABLE PACKAGE "STUDENT"."PAKIETSHOW" 
+IS
+PROCEDURE SHOW_ADMIN(ID_K IN NUMERIC,CURSOR1 OUT SYS_REFCURSOR);
+PROCEDURE SHOW_AUTORZY(CURSOR_4 OUT SYS_REFCURSOR);
+PROCEDURE SHOW_BOOKS(
+CURSOR_1 OUT SYS_REFCURSOR);
+PROCEDURE SHOW_BOOKS_ADMIN(
+CURSOR_11 OUT SYS_REFCURSOR);
+PROCEDURE SHOW_KARY(
+CURSOR_2 OUT SYS_REFCURSOR);
+PROCEDURE SHOW_KATEGORIE(
+CURSOR_6 OUT SYS_REFCURSOR);
+PROCEDURE SHOW_KLIENCI(ID_K IN NUMERIC,CURSOR1 OUT SYS_REFCURSOR);
+PROCEDURE SHOW_KLIENCI_ADMIN(
+CURSOR_12 OUT SYS_REFCURSOR);
+PROCEDURE SHOW_WYDAWNICTWA(
+CURSOR_3 OUT SYS_REFCURSOR);
+PROCEDURE SHOW_WYP_ADM(
+CURSOR_5 OUT SYS_REFCURSOR);
+PROCEDURE SHOW_WYPOZYCZENIA(ID_K IN NUMERIC,CURSOR1 OUT SYS_REFCURSOR);
+PROCEDURE SHOW_WYPOZYCZENIA2(ID_K IN NUMERIC,CURSOR12 OUT SYS_REFCURSOR);
+end;
+
+/
+--------------------------------------------------------
+--  DDL for Package PAKIETUPDATE
+--------------------------------------------------------
+
+  CREATE OR REPLACE NONEDITIONABLE PACKAGE "STUDENT"."PAKIETUPDATE" 
+IS
+PROCEDURE UPDATE_KLIENCI_ADRES(ID_A IN INTEGER, J_MIEJSCOWOSC IN VARCHAR2, J_ULICA IN VARCHAR2, J_NUMER_DOMU IN VARCHAR2, J_NUMER_LOKALU IN VARCHAR2, J_KOD_POCZTOWY IN VARCHAR2);
+PROCEDURE UPDATE_KLIENCI_DANE(ID_K IN INTEGER, J_IMIE IN VARCHAR2, J_NAZWISKO IN VARCHAR2, J_NUMER_TELEFONU IN VARCHAR2);
+PROCEDURE UPDATE_KSIAZKI_ADM(ID_K IN INTEGER, J_ILOSC_EGZEMPLARZY IN INTEGER);
+PROCEDURE UPDATE_WYP_ADM(ID_W IN INTEGER, J_DATAZWROTU IN DATE, J_NALEZNOSC IN INTEGER);
+end;
+
+/
+--------------------------------------------------------
+--  DDL for Package Body PAKIETADD
+--------------------------------------------------------
+
+  CREATE OR REPLACE NONEDITIONABLE PACKAGE BODY "STUDENT"."PAKIETADD" 
+IS
+PROCEDURE           "ADD_ADRES" 
 (v_idadresu IN ADRESY.ID_ADRESU%TYPE,
 v_miejscowosc IN ADRESY.MIEJSCOWOSC%TYPE,
 v_ulica IN ADRESY.ULICA%TYPE,
@@ -394,16 +700,7 @@ BEGIN
   out_result := 'FALSE';
   ROLLBACK;
 END;
-
-
-
-/
---------------------------------------------------------
---  DDL for Procedure ADD_AUTOR
---------------------------------------------------------
-set define off;
-
-  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "STUDENT"."ADD_AUTOR" 
+PROCEDURE           "ADD_AUTOR" 
 (v_idautora IN AUTORZY.ID_AUTORA%TYPE,
 v_imie IN AUTORZY.IMIE%TYPE,
 v_nazwisko IN AUTORZY.NAZWISKO%TYPE,
@@ -424,15 +721,7 @@ BEGIN
   out_result := 'FALSE';
   ROLLBACK;
 END;
-
-
-/
---------------------------------------------------------
---  DDL for Procedure ADD_KATEGORIA
---------------------------------------------------------
-set define off;
-
-  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "STUDENT"."ADD_KATEGORIA" 
+PROCEDURE           "ADD_KATEGORIA" 
 (v_idkategorii IN KATEGORIE.ID_KATEGORII%TYPE,
 v_nazwa IN KATEGORIE.NAZWA%TYPE,
 out_result OUT VARCHAR2)
@@ -449,14 +738,7 @@ BEGIN
   out_result := 'FALSE';
   ROLLBACK;
 END;
-
-/
---------------------------------------------------------
---  DDL for Procedure ADD_KONTO
---------------------------------------------------------
-set define off;
-
-  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "STUDENT"."ADD_KONTO" 
+PROCEDURE           "ADD_KONTO" 
 (v_idkonta IN LOGOWANIE.ID_KONTA%TYPE,
 v_idroli IN LOGOWANIE.ID_ROLI%TYPE,
 v_login IN LOGOWANIE.LOGIN%TYPE,
@@ -476,15 +758,7 @@ BEGIN
   ROLLBACK;
 END;
 
-
-
-/
---------------------------------------------------------
---  DDL for Procedure ADD_KSIAZKA
---------------------------------------------------------
-set define off;
-
-  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "STUDENT"."ADD_KSIAZKA" 
+PROCEDURE           "ADD_KSIAZKA" 
 (v_idksiazki IN KSIAZKI.ID_KSIAZKI%TYPE,
 v_idkategorii IN KSIAZKI.ID_KATEGORII%TYPE,
 v_idwydawnictwa IN KSIAZKI.ID_WYDAWNICTWA%TYPE,
@@ -508,15 +782,7 @@ BEGIN
   out_result := 'FALSE';
   ROLLBACK;
 END;
-
-
-/
---------------------------------------------------------
---  DDL for Procedure ADD_USER
---------------------------------------------------------
-set define off;
-
-  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "STUDENT"."ADD_USER" 
+PROCEDURE           "ADD_USER" 
 (v_idklienta IN KLIENCI.ID_KLIENTA%TYPE,
 v_idadresu IN KLIENCI.ID_ADRESU%TYPE,
 v_idkonta IN KLIENCI.ID_KONTA%TYPE,
@@ -538,15 +804,7 @@ BEGIN
   ROLLBACK;
 END;
 
-
-
-/
---------------------------------------------------------
---  DDL for Procedure ADD_WYDAWNICTWO
---------------------------------------------------------
-set define off;
-
-  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "STUDENT"."ADD_WYDAWNICTWO" 
+PROCEDURE           "ADD_WYDAWNICTWO" 
 (v_idwydawnictwa IN WYDAWNICTWA.ID_WYDAWNICTWA%TYPE,
 v_nazwa IN WYDAWNICTWA.NAZWA%TYPE,
 v_miejscowosc IN WYDAWNICTWA.MIEJSCOWOSC%TYPE,
@@ -567,13 +825,7 @@ BEGIN
   ROLLBACK;
 END;
 
-/
---------------------------------------------------------
---  DDL for Procedure ADD_WYPOZYCZENIE
---------------------------------------------------------
-set define off;
-
-  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "STUDENT"."ADD_WYPOZYCZENIE" 
+PROCEDURE           "ADD_WYPOZYCZENIE" 
 (v_idwypozyczenia IN WYPOZYCZENIA.ID_WYPOZYCZENIA%TYPE,
 v_idksiazki IN WYPOZYCZENIA.ID_KSIAZKI%TYPE,
 v_idpracownika IN WYPOZYCZENIA.ID_PRACOWNIKA%TYPE,
@@ -604,28 +856,17 @@ BEGIN
   ROLLBACK;
 END ADD_WYPOZYCZENIE;
 
+
+end;
+
 /
 --------------------------------------------------------
---  DDL for Procedure DELETEWYP
+--  DDL for Package Body PAKIETGET
 --------------------------------------------------------
-set define off;
 
-  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "STUDENT"."DELETEWYP" (j_idwyp IN INT)
+  CREATE OR REPLACE NONEDITIONABLE PACKAGE BODY "STUDENT"."PAKIETGET" 
 IS
-BEGIN
-  DELETE KARY_WYPOZYCZENIA where ID_WYPOZYCZENIA = j_idwyp;
-  COMMIT;
-   DELETE WYPOZYCZENIA where ID_WYPOZYCZENIA = j_idwyp;
-  COMMIT;
-END;
-
-/
---------------------------------------------------------
---  DDL for Procedure GET_ID_AUTORA
---------------------------------------------------------
-set define off;
-
-  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "STUDENT"."GET_ID_AUTORA" 
+PROCEDURE           "GET_ID_AUTORA" 
 (v_imie IN AUTORZY.IMIE%TYPE, v_nazwisko IN AUTORZY.NAZWISKO%TYPE, CURSOR8 OUT SYS_REFCURSOR)
 as
 BEGIN
@@ -634,14 +875,7 @@ OPEN CURSOR8 FOR
   FROM AUTORZY
   WHERE IMIE = v_imie AND NAZWISKO = v_nazwisko;
 END GET_ID_AUTORA;
-
-/
---------------------------------------------------------
---  DDL for Procedure GET_ID_KATEGORII
---------------------------------------------------------
-set define off;
-
-  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "STUDENT"."GET_ID_KATEGORII" 
+PROCEDURE           "GET_ID_KATEGORII" 
 (v_nazwa IN KATEGORIE.NAZWA%TYPE, CURSOR7 OUT SYS_REFCURSOR)
 as
 BEGIN
@@ -650,14 +884,7 @@ OPEN CURSOR7 FOR
   FROM KATEGORIE
   WHERE NAZWA = v_nazwa;
 END GET_ID_KATEGORII;
-
-/
---------------------------------------------------------
---  DDL for Procedure GET_ID_KLIENTA_LOGIN
---------------------------------------------------------
-set define off;
-
-  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "STUDENT"."GET_ID_KLIENTA_LOGIN" 
+PROCEDURE "GET_ID_KLIENTA_LOGIN"
 (j_idkonta IN KLIENCI.ID_KONTA%TYPE,data OUT SYS_REFCURSOR)
 AS
 BEGIN
@@ -666,14 +893,7 @@ BEGIN
     FROM KLIENCI
     WHERE ID_KONTA = j_idkonta;
 END;
-
-/
---------------------------------------------------------
---  DDL for Procedure GET_ID_KSIAZKI_UPDATE
---------------------------------------------------------
-set define off;
-
-  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "STUDENT"."GET_ID_KSIAZKI_UPDATE" 
+PROCEDURE           "GET_ID_KSIAZKI_UPDATE" 
 (v_tytul IN KSIAZKI.TYTUL%TYPE, CURSOR10 OUT SYS_REFCURSOR)
 as
 BEGIN
@@ -682,14 +902,7 @@ OPEN CURSOR10 FOR
   FROM KSIAZKI
   WHERE TYTUL = v_tytul;
 END GET_ID_KSIAZKI_UPDATE;
-
-/
---------------------------------------------------------
---  DDL for Procedure GET_ID_WYDAWNICTWA
---------------------------------------------------------
-set define off;
-
-  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "STUDENT"."GET_ID_WYDAWNICTWA" 
+PROCEDURE           "GET_ID_WYDAWNICTWA" 
 (v_nazwa IN WYDAWNICTWA.NAZWA%TYPE, CURSOR9 OUT SYS_REFCURSOR)
 as
 BEGIN
@@ -698,33 +911,16 @@ OPEN CURSOR9 FOR
   FROM WYDAWNICTWA
   WHERE NAZWA = v_nazwa;
 END;
+end;
 
 /
 --------------------------------------------------------
---  DDL for Procedure LOGIN
+--  DDL for Package Body PAKIETSHOW
 --------------------------------------------------------
-set define off;
 
-  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "STUDENT"."LOGIN" 
-(j_login IN LOGOWANIE.LOGIN%TYPE,j_haslo IN LOGOWANIE.HASLO%TYPE,data OUT SYS_REFCURSOR)
-AS
-BEGIN
-    OPEN data FOR
-        Select ID_KONTA ,
-ID_ROLI ,
-LOGIN ,
-HASLO 
-        from LOGOWANIE
-        Where LOGIN=j_login AND HASLO=j_haslo;
-END;
-
-/
---------------------------------------------------------
---  DDL for Procedure SHOW_ADMIN
---------------------------------------------------------
-set define off;
-
-  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "STUDENT"."SHOW_ADMIN" (ID_K IN NUMERIC,CURSOR1 OUT SYS_REFCURSOR) AS 
+  CREATE OR REPLACE NONEDITIONABLE PACKAGE BODY "STUDENT"."PAKIETSHOW" 
+IS
+PROCEDURE           "SHOW_ADMIN" (ID_K IN NUMERIC,CURSOR1 OUT SYS_REFCURSOR) AS 
 BEGIN
 OPEN CURSOR1 FOR
 SELECT
@@ -733,14 +929,7 @@ FROM PRACOWNICY
 WHERE ID_KONTA=ID_K;
 END SHOW_ADMIN;
 
-
-/
---------------------------------------------------------
---  DDL for Procedure SHOW_AUTORZY
---------------------------------------------------------
-set define off;
-
-  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "STUDENT"."SHOW_AUTORZY" (
+PROCEDURE           "SHOW_AUTORZY" (
 CURSOR_4 OUT SYS_REFCURSOR)
 AS
 BEGIN 
@@ -749,15 +938,7 @@ SELECT IMIE, NAZWISKO, NARODOWOSC, DATA_URODZENIA, DATA_SMIERCI
 FROM AUTORZY;
 END;
 
-
-
-/
---------------------------------------------------------
---  DDL for Procedure SHOW_BOOKS
---------------------------------------------------------
-set define off;
-
-  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "STUDENT"."SHOW_BOOKS" (
+PROCEDURE           "SHOW_BOOKS" (
 CURSOR_1 OUT SYS_REFCURSOR)
 AS
 BEGIN
@@ -769,14 +950,7 @@ JOIN AUTORZY A on AK.ID_AUTORA = A.ID_AUTORA
 JOIN KATEGORIE KA on K.ID_KATEGORII = KA.ID_KATEGORII;
 END;
 
-
-/
---------------------------------------------------------
---  DDL for Procedure SHOW_BOOKS_ADMIN
---------------------------------------------------------
-set define off;
-
-  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "STUDENT"."SHOW_BOOKS_ADMIN" (
+PROCEDURE           "SHOW_BOOKS_ADMIN" (
 CURSOR_11 OUT SYS_REFCURSOR)
 AS
 BEGIN
@@ -788,13 +962,7 @@ JOIN AUTORZY A on AK.ID_AUTORA = A.ID_AUTORA
 JOIN KATEGORIE KA on K.ID_KATEGORII = KA.ID_KATEGORII;
 END;
 
-/
---------------------------------------------------------
---  DDL for Procedure SHOW_KARY
---------------------------------------------------------
-set define off;
-
-  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "STUDENT"."SHOW_KARY" (
+PROCEDURE           "SHOW_KARY" (
 CURSOR_2 OUT SYS_REFCURSOR)
 AS
 BEGIN 
@@ -803,15 +971,7 @@ SELECT TYP_KARY, KWOTA_WYNAGRADZAJACA
 FROM KARY;
 END;
 
-
-
-/
---------------------------------------------------------
---  DDL for Procedure SHOW_KATEGORIE
---------------------------------------------------------
-set define off;
-
-  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "STUDENT"."SHOW_KATEGORIE" (
+PROCEDURE           "SHOW_KATEGORIE" (
 CURSOR_6 OUT SYS_REFCURSOR)
 AS
 BEGIN 
@@ -820,13 +980,7 @@ SELECT ID_KATEGORII, NAZWA
 FROM KATEGORIE;
 END;
 
-/
---------------------------------------------------------
---  DDL for Procedure SHOW_KLIENCI
---------------------------------------------------------
-set define off;
-
-  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "STUDENT"."SHOW_KLIENCI" (ID_K IN NUMERIC,CURSOR1 OUT SYS_REFCURSOR) AS 
+PROCEDURE           "SHOW_KLIENCI" (ID_K IN NUMERIC,CURSOR1 OUT SYS_REFCURSOR) AS 
 BEGIN
 OPEN CURSOR1 FOR
 SELECT IMIE,NAZWISKO,NUMER_TELEFONU,ADRESY.ID_ADRESU,MIEJSCOWOSC,ULICA,NUMER_DOMU,NUMER_LOKALU,KOD_POCZTOWY
@@ -835,13 +989,7 @@ JOIN ADRESY ON klienci.id_adresu = adresy.id_adresu
 WHERE klienci.id_konta = ID_K;
 END SHOW_KLIENCI;
 
-/
---------------------------------------------------------
---  DDL for Procedure SHOW_KLIENCI_ADMIN
---------------------------------------------------------
-set define off;
-
-  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "STUDENT"."SHOW_KLIENCI_ADMIN" (
+PROCEDURE           "SHOW_KLIENCI_ADMIN" (
 CURSOR_12 OUT SYS_REFCURSOR)
 AS
 BEGIN
@@ -850,13 +998,7 @@ SELECT ID_KLIENTA, IMIE, NAZWISKO, NUMER_TELEFONU
 FROM KLIENCI;
 END;
 
-/
---------------------------------------------------------
---  DDL for Procedure SHOW_WYDAWNICTWA
---------------------------------------------------------
-set define off;
-
-  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "STUDENT"."SHOW_WYDAWNICTWA" (
+PROCEDURE           "SHOW_WYDAWNICTWA" (
 CURSOR_3 OUT SYS_REFCURSOR)
 AS
 BEGIN 
@@ -865,15 +1007,7 @@ SELECT NAZWA, MIEJSCOWOSC, ULICA, NUMER_BUDYNKU
 FROM WYDAWNICTWA;
 END;
 
-
-
-/
---------------------------------------------------------
---  DDL for Procedure SHOW_WYP_ADM
---------------------------------------------------------
-set define off;
-
-  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "STUDENT"."SHOW_WYP_ADM" (
+PROCEDURE           "SHOW_WYP_ADM" (
 CURSOR_5 OUT SYS_REFCURSOR)
 AS
 BEGIN
@@ -887,13 +1021,7 @@ JOIN KLIENCI KL on KL.ID_KLIENTA = W.id_klienta
 JOIN KARY_WYPOZYCZENIA KW on KW.ID_WYPOZYCZENIA = W.ID_WYPOZYCZENIA;
 END;
 
-/
---------------------------------------------------------
---  DDL for Procedure SHOW_WYPOZYCZENIA
---------------------------------------------------------
-set define off;
-
-  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "STUDENT"."SHOW_WYPOZYCZENIA" (ID_K IN NUMERIC,CURSOR1 OUT SYS_REFCURSOR) AS 
+PROCEDURE           "SHOW_WYPOZYCZENIA" (ID_K IN NUMERIC,CURSOR1 OUT SYS_REFCURSOR) AS 
 BEGIN
 OPEN CURSOR1 FOR
   SELECT TYTUL,NAZWA,IMIE,NAZWISKO,DATA_WYPOZYCZENIA,DATA_ZWROTU,NALEZNOSC FROM WYPOZYCZENIA
@@ -905,13 +1033,7 @@ OPEN CURSOR1 FOR
   WHERE ID_KLIENTA = ID_K;
 END SHOW_WYPOZYCZENIA;
 
-/
---------------------------------------------------------
---  DDL for Procedure SHOW_WYPOZYCZENIA2
---------------------------------------------------------
-set define off;
-
-  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "STUDENT"."SHOW_WYPOZYCZENIA2" (ID_K IN NUMERIC,CURSOR12 OUT SYS_REFCURSOR) AS 
+PROCEDURE           "SHOW_WYPOZYCZENIA2" (ID_K IN NUMERIC,CURSOR12 OUT SYS_REFCURSOR) AS 
 BEGIN
 OPEN CURSOR12 FOR
   SELECT wypozyczenia.id_wypozyczenia,TYTUL,NAZWA,IMIE,NAZWISKO,DATA_WYPOZYCZENIA,DATA_ZWROTU,NALEZNOSC FROM WYPOZYCZENIA
@@ -923,52 +1045,34 @@ OPEN CURSOR12 FOR
   WHERE ID_KLIENTA = ID_K;
 END;
 
+end;
+
 /
 --------------------------------------------------------
---  DDL for Procedure UPDATE_KLIENCI_ADRES
+--  DDL for Package Body PAKIETUPDATE
 --------------------------------------------------------
-set define off;
 
-  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "STUDENT"."UPDATE_KLIENCI_ADRES" (ID_A IN INTEGER, J_MIEJSCOWOSC IN VARCHAR2, J_ULICA IN VARCHAR2, J_NUMER_DOMU IN VARCHAR2, J_NUMER_LOKALU IN VARCHAR2, J_KOD_POCZTOWY IN VARCHAR2) AS
+  CREATE OR REPLACE NONEDITIONABLE PACKAGE BODY "STUDENT"."PAKIETUPDATE" 
+IS
+PROCEDURE "UPDATE_KLIENCI_ADRES" (ID_A IN INTEGER, J_MIEJSCOWOSC IN VARCHAR2, J_ULICA IN VARCHAR2, J_NUMER_DOMU IN VARCHAR2, J_NUMER_LOKALU IN VARCHAR2, J_KOD_POCZTOWY IN VARCHAR2) AS
 BEGIN
 UPDATE ADRESY
 SET MIEJSCOWOSC = J_MIEJSCOWOSC, ULICA = J_ULICA, NUMER_DOMU = J_NUMER_DOMU, NUMER_LOKALU = J_NUMER_LOKALU, KOD_POCZTOWY = J_KOD_POCZTOWY
 WHERE ID_ADRESU = ID_A;
 END UPDATE_KLIENCI_ADRES;
-
-/
---------------------------------------------------------
---  DDL for Procedure UPDATE_KLIENCI_DANE
---------------------------------------------------------
-set define off;
-
-  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "STUDENT"."UPDATE_KLIENCI_DANE" (ID_K IN INTEGER, J_IMIE IN VARCHAR2, J_NAZWISKO IN VARCHAR2, J_NUMER_TELEFONU IN VARCHAR2) AS
+PROCEDURE "UPDATE_KLIENCI_DANE" (ID_K IN INTEGER, J_IMIE IN VARCHAR2, J_NAZWISKO IN VARCHAR2, J_NUMER_TELEFONU IN VARCHAR2) AS
 BEGIN
 UPDATE KLIENCI
     SET IMIE = J_IMIE, NAZWISKO = J_NAZWISKO, NUMER_TELEFONU = J_NUMER_TELEFONU
     WHERE ID_KONTA = ID_K;
 END UPDATE_KLIENCI_DANE;
-
-/
---------------------------------------------------------
---  DDL for Procedure UPDATE_KSIAZKI_ADM
---------------------------------------------------------
-set define off;
-
-  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "STUDENT"."UPDATE_KSIAZKI_ADM" (ID_K IN INTEGER, J_ILOSC_EGZEMPLARZY IN INTEGER) AS
+PROCEDURE "UPDATE_KSIAZKI_ADM" (ID_K IN INTEGER, J_ILOSC_EGZEMPLARZY IN INTEGER) AS
 BEGIN
 UPDATE KSIAZKI
     SET ILOSC_EGZEMPLARZY = J_ILOSC_EGZEMPLARZY
     WHERE ID_KSIAZKI = ID_K;
 END UPDATE_KSIAZKI_ADM;
-
-/
---------------------------------------------------------
---  DDL for Procedure UPDATE_WYP_ADM
---------------------------------------------------------
-set define off;
-
-  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "STUDENT"."UPDATE_WYP_ADM" (ID_W IN INTEGER, J_DATAZWROTU IN DATE, J_NALEZNOSC IN INTEGER) AS
+PROCEDURE "UPDATE_WYP_ADM" (ID_W IN INTEGER, J_DATAZWROTU IN DATE, J_NALEZNOSC IN INTEGER) AS
 BEGIN
 UPDATE WYPOZYCZENIA
     SET DATA_ZWROTU = J_DATAZWROTU
@@ -977,6 +1081,7 @@ UPDATE KARY_WYPOZYCZENIA
     SET NALEZNOSC = J_NALEZNOSC
     WHERE ID_WYPOZYCZENIA = ID_W;
 END UPDATE_WYP_ADM;
+end;
 
 /
 --------------------------------------------------------

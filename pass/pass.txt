@@ -1,5 +1,15 @@
 ﻿Konto administratora: 
-login: admin hasło: admin
+login: admin
+hasło: admin
 
 Konto użytkownika:
-login: student hasło: student
+login: student 
+hasło: student
+
+
+
+-----------------
+
+Do operacji na bazie danych w Oracle mieliśmy utworzone konto:
+login: student
+hasło: student
