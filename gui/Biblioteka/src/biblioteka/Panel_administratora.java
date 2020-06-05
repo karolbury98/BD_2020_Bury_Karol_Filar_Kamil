@@ -326,7 +326,7 @@ public class Panel_administratora extends javax.swing.JFrame {
        try{
            if(conn!=null){
                CallableStatement cs = null;
-              cs = conn.prepareCall("call SHOW_BOOKS(?)");
+              cs = conn.prepareCall("call PAKIETSHOW.SHOW_BOOKS(?)");
         cs.registerOutParameter(1, OracleTypes.CURSOR);
         cs.execute();
         ResultSet cursor = ((OracleCallableStatement) cs).getCursor(1);
@@ -382,7 +382,7 @@ public class Panel_administratora extends javax.swing.JFrame {
            if(conn!=null){
                 CallableStatement cs = null;
               
-              cs = conn.prepareCall("call GET_ID_KSIAZKI_UPDATE(?,?)");
+              cs = conn.prepareCall("call PAKIETGET.GET_ID_KSIAZKI_UPDATE(?,?)");
               cs.setString(1, jTextField2.getText());
        cs.registerOutParameter(2, OracleTypes.CURSOR);
         cs.execute();
@@ -394,7 +394,7 @@ public class Panel_administratora extends javax.swing.JFrame {
                
            }
            CallableStatement cs2 = null;
-         cs2 = conn.prepareCall("call UPDATE_KSIAZKI_ADM(?,?)");
+         cs2 = conn.prepareCall("call PAKIETUPDATE.UPDATE_KSIAZKI_ADM(?,?)");
          cs2.setInt(1,idksiazki );
          cs2.setString(2, s1);
          cs2.execute();

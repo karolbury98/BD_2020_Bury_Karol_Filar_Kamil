@@ -182,7 +182,7 @@ public class Panel_rejestracyjny3 extends javax.swing.JFrame {
                     //   System.out.println("ID KONTA: "+rs3.getInt(1));
             
                 System.out.println(nextID_from_seq);
-                  stmt = conn.prepareCall("{call ADD_USER(?,?,?,?,?,?,?)}");
+                  stmt = conn.prepareCall("{call PAKIETADD.ADD_USER(?,?,?,?,?,?,?)}");
                   
                   
                   stmt.setInt(1,idklienta);

@@ -157,7 +157,7 @@ public class Moje_konto_admin extends javax.swing.JFrame {
        try{
            if(conn!=null){
         CallableStatement cs = null;
-        cs = conn.prepareCall("call SHOW_ADMIN(?,?)");
+        cs = conn.prepareCall("call PAKIETSHOW.SHOW_ADMIN(?,?)");
         cs.setInt(1,User_login.getInstance().getID_Konta());
         cs.registerOutParameter(2, OracleTypes.CURSOR);
         cs.execute();

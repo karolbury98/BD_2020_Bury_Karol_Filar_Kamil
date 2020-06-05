@@ -118,7 +118,7 @@ public class Biblioteka_dodajkategorie extends javax.swing.JFrame {
             int nextID_from_seq;
             nextID_from_seq = rs.getInt(1);
                 System.out.println(nextID_from_seq);
-                  stmt = conn.prepareCall("{call ADD_KATEGORIA(?,?,?)}");
+                  stmt = conn.prepareCall("{call PAKIETADD.ADD_KATEGORIA(?,?,?)}");
            
           int idkategorii = nextID_from_seq;
        

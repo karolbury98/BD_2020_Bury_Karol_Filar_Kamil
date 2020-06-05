@@ -129,7 +129,7 @@ public class Wydawnictwa extends javax.swing.JFrame {
        try{
             if(conn!=null){
               CallableStatement cs = null;
-              cs = conn.prepareCall("call SHOW_WYDAWNICTWA(?)");
+              cs = conn.prepareCall("call PAKIETSHOW.SHOW_WYDAWNICTWA(?)");
         cs.registerOutParameter(1, OracleTypes.CURSOR);
         cs.execute();
         ResultSet cursor = ((OracleCallableStatement) cs).getCursor(1);

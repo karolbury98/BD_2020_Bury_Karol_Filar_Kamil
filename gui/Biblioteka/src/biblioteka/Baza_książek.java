@@ -269,7 +269,7 @@ public int idkary;
        try{
            if(conn!=null){
                CallableStatement cs = null;
-              cs = conn.prepareCall("call SHOW_BOOKS(?)");
+              cs = conn.prepareCall("call PAKIETSHOW.SHOW_BOOKS(?)");
         cs.registerOutParameter(1, OracleTypes.CURSOR);
         cs.execute();
         ResultSet cursor = ((OracleCallableStatement) cs).getCursor(1);
@@ -317,7 +317,7 @@ public int idkary;
          try{
            if(conn!=null){
                 CallableStatement cs = null;
-                  cs = conn.prepareCall("call GET_ID_KSIAZKI_UPDATE(?,?)");
+                  cs = conn.prepareCall("call PAKIETGET.GET_ID_KSIAZKI_UPDATE(?,?)");
               cs.setString(1, jTextField1.getText());
               cs.registerOutParameter(2, OracleTypes.CURSOR);
         cs.execute();
@@ -350,7 +350,7 @@ public int idkary;
             int nextID_from_seq;
             nextID_from_seq = rs.getInt(1);
                 System.out.println(nextID_from_seq);
-                  stmt = conn.prepareCall("call ADD_WYPOZYCZENIE(?,?,?,?,?,?,?,?,?)");
+                  stmt = conn.prepareCall("call PAKIETADD.ADD_WYPOZYCZENIE(?,?,?,?,?,?,?,?,?)");
                   
                   idwypozyczenia = nextID_from_seq;
                   

@@ -43,7 +43,7 @@ public class Biblioteka_dodajksiazke extends javax.swing.JFrame {
        try{
            if(conn!=null){
               CallableStatement cs = null;
-              cs = conn.prepareCall("call SHOW_KATEGORIE(?)");
+              cs = conn.prepareCall("call PAKIETSHOW.SHOW_KATEGORIE(?)");
         cs.registerOutParameter(1, OracleTypes.CURSOR);
         cs.execute();
         ResultSet cursor = ((OracleCallableStatement) cs).getCursor(1);
@@ -71,7 +71,7 @@ public class Biblioteka_dodajksiazke extends javax.swing.JFrame {
        try{
            if(conn!=null){
               CallableStatement cs = null;
-              cs = conn.prepareCall("call SHOW_AUTORZY(?)");
+              cs = conn.prepareCall("call PAKIETSHOW.SHOW_AUTORZY(?)");
         cs.registerOutParameter(1, OracleTypes.CURSOR);
         cs.execute();
         ResultSet cursor = ((OracleCallableStatement) cs).getCursor(1);
@@ -96,7 +96,7 @@ public class Biblioteka_dodajksiazke extends javax.swing.JFrame {
        try{
            if(conn!=null){
               CallableStatement cs = null;
-              cs = conn.prepareCall("call SHOW_WYDAWNICTWA(?)");
+              cs = conn.prepareCall("call PAKIETSHOW.SHOW_WYDAWNICTWA(?)");
         cs.registerOutParameter(1, OracleTypes.CURSOR);
         cs.execute();
         ResultSet cursor = ((OracleCallableStatement) cs).getCursor(1);
@@ -421,7 +421,7 @@ public class Biblioteka_dodajksiazke extends javax.swing.JFrame {
            if(conn!=null){
               CallableStatement cs = null;
               
-              cs = conn.prepareCall("call GET_ID_KATEGORII(?,?)");
+              cs = conn.prepareCall("call PAKIETGET.GET_ID_KATEGORII(?,?)");
               cs.setString(1, jTextField4.getText());
        cs.registerOutParameter(2, OracleTypes.CURSOR);
         cs.execute();
@@ -439,7 +439,7 @@ public class Biblioteka_dodajksiazke extends javax.swing.JFrame {
            if(conn!=null){
               CallableStatement cs = null;
               
-              cs = conn.prepareCall("call GET_ID_AUTORA(?,?,?)");
+              cs = conn.prepareCall("call PAKIETGET.GET_ID_AUTORA(?,?,?)");
               String[] dane = jTextField5.getText().split(" ");
               cs.setString(1, dane[0]);
               cs.setString(2, dane[1]);
@@ -458,7 +458,7 @@ public class Biblioteka_dodajksiazke extends javax.swing.JFrame {
            if(conn!=null){
               CallableStatement cs = null;
               
-              cs = conn.prepareCall("call GET_ID_WYDAWNICTWA(?,?)");
+              cs = conn.prepareCall("call PAKIETGET.GET_ID_WYDAWNICTWA(?,?)");
               cs.setString(1, jTextField6.getText());
        cs.registerOutParameter(2, OracleTypes.CURSOR);
         cs.execute();
@@ -479,7 +479,7 @@ public class Biblioteka_dodajksiazke extends javax.swing.JFrame {
             int nextID_from_seq;
             nextID_from_seq = rs.getInt(1);
                 System.out.println(nextID_from_seq);
-                  stmt = conn.prepareCall("{call ADD_KSIAZKA(?,?,?,?,?,?,?,?)}");
+                  stmt = conn.prepareCall("{call PAKIETADD.ADD_KSIAZKA(?,?,?,?,?,?,?,?)}");
            
           int idksiazki = nextID_from_seq;
        

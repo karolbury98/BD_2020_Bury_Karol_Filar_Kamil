@@ -133,7 +133,7 @@ public class Autorzy extends javax.swing.JFrame {
        try{
            if(conn!=null){
               CallableStatement cs = null;
-              cs = conn.prepareCall("call SHOW_AUTORZY(?)");
+              cs = conn.prepareCall("call PAKIETSHOW.SHOW_AUTORZY(?)");
         cs.registerOutParameter(1, OracleTypes.CURSOR);
         cs.execute();
         ResultSet cursor = ((OracleCallableStatement) cs).getCursor(1);

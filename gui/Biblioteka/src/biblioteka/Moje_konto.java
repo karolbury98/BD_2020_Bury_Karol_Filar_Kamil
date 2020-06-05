@@ -230,7 +230,7 @@ public class Moje_konto extends javax.swing.JFrame{
        try{
            if(conn!=null){
         CallableStatement cs = null;
-        cs = conn.prepareCall("call SHOW_KLIENCI(?,?)");
+        cs = conn.prepareCall("call PAKIETSHOW.SHOW_KLIENCI(?,?)");
         
         cs.setInt(1,User_login.getInstance().getID_Konta());
               
@@ -289,7 +289,7 @@ public class Moje_konto extends javax.swing.JFrame{
                */
                //
                 CallableStatement cs3 = null;
-        cs3 = conn.prepareCall("call SHOW_KLIENCI(?,?)");
+        cs3 = conn.prepareCall("call PAKIETSHOW.SHOW_KLIENCI(?,?)");
         
         cs3.setInt(1,User_login.getInstance().getID_Konta());
               
@@ -303,13 +303,13 @@ public class Moje_konto extends javax.swing.JFrame{
                
                 CallableStatement cs = null;
                 CallableStatement cs2 = null;
-        cs = conn.prepareCall("call UPDATE_KLIENCI_DANE(?,?,?,?)");
+        cs = conn.prepareCall("call PAKIETUPDATE.UPDATE_KLIENCI_DANE(?,?,?,?)");
         cs.setInt(1, User_login.getInstance().getID_Konta());
         cs.setString(2, s1);
         cs.setString(3, s2);
         cs.setString(4, s3);
         cs.execute();
-        cs2 = conn.prepareCall("call UPDATE_KLIENCI_ADRES(?,?,?,?,?,?)");
+        cs2 = conn.prepareCall("call PAKIETUPDATE.UPDATE_KLIENCI_ADRES(?,?,?,?,?,?)");
         cs2.setInt(1,idadresu);               
         cs2.setString(2, s4);
         cs2.setString(3, s5);

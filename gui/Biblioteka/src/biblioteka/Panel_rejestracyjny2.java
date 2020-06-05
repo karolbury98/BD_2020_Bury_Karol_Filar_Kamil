@@ -216,7 +216,7 @@ public class Panel_rejestracyjny2 extends javax.swing.JFrame {
             int nextID_from_seq;
             nextID_from_seq = rs.getInt(1);
                // System.out.println(nextID_from_seq);
-                  stmt = conn.prepareCall("{call ADD_ADRES(?,?,?,?,?,?,?)}");
+                  stmt = conn.prepareCall("{call PAKIETADD.ADD_ADRES(?,?,?,?,?,?,?)}");
                   
                   int idadresu = nextID_from_seq;
                   stmt.setInt(1,idadresu);

@@ -351,7 +351,7 @@ Connection conn = null;
        try{
            if(conn!=null){
                CallableStatement cs = null;
-              cs = conn.prepareCall("call SHOW_WYP_ADM(?)");
+              cs = conn.prepareCall("call PAKIETSHOW.SHOW_WYP_ADM(?)");
         cs.registerOutParameter(1, OracleTypes.CURSOR);
         cs.execute();
         ResultSet cursor = ((OracleCallableStatement) cs).getCursor(1);
@@ -389,7 +389,7 @@ Connection conn = null;
             int idwyp = Integer.valueOf(jLabel11.getText());
             int naleznosc = Integer.valueOf(s2);
                System.out.println(idwyp);
-         cs = conn.prepareCall("call UPDATE_WYP_ADM(?,?,?)");
+         cs = conn.prepareCall("call PAKIETUPDATE.UPDATE_WYP_ADM(?,?,?)");
             cs.setInt(1,idwyp );
                
                try {

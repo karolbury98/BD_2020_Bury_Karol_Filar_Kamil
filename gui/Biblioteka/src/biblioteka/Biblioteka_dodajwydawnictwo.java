@@ -163,7 +163,7 @@ public class Biblioteka_dodajwydawnictwo extends javax.swing.JFrame {
             int nextID_from_seq;
             nextID_from_seq = rs.getInt(1);
                 System.out.println(nextID_from_seq);
-                  stmt = conn.prepareCall("{call ADD_WYDAWNICTWO(?,?,?,?,?,?)}");
+                  stmt = conn.prepareCall("{call PAKIETADD.ADD_WYDAWNICTWO(?,?,?,?,?,?)}");
            
           int idwydawnictwo = nextID_from_seq;
        

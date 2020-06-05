@@ -161,7 +161,7 @@ public class Logowanie extends javax.swing.JFrame {
                    ID_ROLI = cursor.getInt(2);
                    User_login.INSTANCE.setID_Roli(cursor.getInt(2));
                   CallableStatement cs2 = null;
-                  cs2 = conn.prepareCall("call GET_ID_KLIENTA_LOGIN(?,?)");
+                  cs2 = conn.prepareCall("call PAKIETGET.GET_ID_KLIENTA_LOGIN(?,?)");
                
                   cs2.setInt(1,ID_KONTA);
                    cs2.registerOutParameter(2, OracleTypes.CURSOR);

@@ -143,7 +143,7 @@ public class Moje_wypozyczenia extends javax.swing.JFrame {
            if(conn!=null){
         CallableStatement cs = null;
         CallableStatement cs2 = null;
-        cs2 = conn.prepareCall("call SHOW_WYPOZYCZENIA2(?,?)");
+        cs2 = conn.prepareCall("call PAKIETSHOW.SHOW_WYPOZYCZENIA2(?,?)");
          cs2.setInt(1,User_login.getInstance().getID_Klienta());
         cs2.registerOutParameter(2, OracleTypes.CURSOR);
         cs2.execute();
@@ -159,7 +159,7 @@ public class Moje_wypozyczenia extends javax.swing.JFrame {
                    System.out.println(idwypozyczenia+": "+cs3.getString(1));
               
                }
-        cs = conn.prepareCall("call SHOW_WYPOZYCZENIA(?,?)");
+        cs = conn.prepareCall("call PAKIETSHOW.SHOW_WYPOZYCZENIA(?,?)");
       
         cs.setInt(1,User_login.getInstance().getID_Klienta());
         cs.registerOutParameter(2, OracleTypes.CURSOR);

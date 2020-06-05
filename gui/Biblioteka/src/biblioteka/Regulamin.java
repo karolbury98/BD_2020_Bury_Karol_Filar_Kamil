@@ -184,7 +184,7 @@ public class Regulamin extends javax.swing.JFrame {
        try{
            if(conn!=null){
               CallableStatement cs = null;
-              cs = conn.prepareCall("call SHOW_KARY(?)");
+              cs = conn.prepareCall("call PAKIETSHOW.SHOW_KARY(?)");
         cs.registerOutParameter(1, OracleTypes.CURSOR);
         cs.execute();
         ResultSet cursor = ((OracleCallableStatement) cs).getCursor(1);
